@@ -56,7 +56,7 @@ test("Use Invalid Size", () => {
 })
 
 test("Use Invalid Flavor", () => {
-    const flavor = getMinAndMaxNumberFromEnum(Size)
+    const flavor = getMinAndMaxNumberFromEnum(BallFlavor)
     const invalidFlavors = [
         flavor.max + 1,
         flavor.min - 1,
@@ -90,7 +90,6 @@ test("Create Id", () => {
     expect(ball.id.length).toBeGreaterThan(20)
 })
 
-
 test("Update Ball", () => {
     const flavor = BallFlavor.chocolate
     const size = Size.medium
@@ -111,4 +110,81 @@ test("Update Ball", () => {
     expect(ball.flavor).toEqual(newFlavor)
     expect(ball.size).toEqual(newSize)
     expect(ball.id).toEqual(ballId)
+})
+
+test("Use Invalid Data to Update Ball", () => {
+    const flavor = BallFlavor.chocolate
+    const size = Size.big
+    let ball: IceCreamBall
+
+    try {
+        ball = new IceCreamBall({ flavor, size })
+    } catch (error: any) {
+        expect.fail(getZodError(error))
+    }
+
+    const newInvalidFlavor = (
+        getMinAndMaxNumberFromEnum(BallFlavor).max
+        + 1
+    )
+
+    const newInvalidSize = (
+        getMinAndMaxNumberFromEnum(Size).min
+        - 1
+    )
+
+    const invalidValues = [
+        [newInvalidFlavor, newInvalidSize],
+        [null, null],
+        ["a", "a"],
+        [null, Size.medium],
+        [BallFlavor.chocolate, "a"],
+        ["", ""]
+    ]
+
+    invalidValues.forEach((value) => {
+        try {
+            ball.updateBall({
+                flavor: value[0] as any,
+                size: value[1] as any
+            })
+        } catch (error) {
+            expect(error).toBeInstanceOf(ZodError)
+            return
+        }
+        expect.fail("Didn't Trigger ZodError")
+    })
+})
+
+test("Use Valid Data to Update Ball", () => {
+    const flavor = BallFlavor.chocolate
+    const size = Size.big
+    let ball: IceCreamBall
+
+    try {
+        ball = new IceCreamBall({ flavor, size })
+    } catch (error: any) {
+        expect.fail(getZodError(error))
+    }
+
+    const validValues = [
+        [BallFlavor.chocolate, Size.medium],
+        [BallFlavor.vanilla, undefined],
+        [undefined, Size.big],
+        [undefined, undefined]
+    ]
+
+    validValues.forEach((value) => {
+        try {
+            ball.updateBall({
+                flavor: value[0] as any,
+                size: value[1] as any
+            })
+        } catch (error) {
+            expect.fail(getZodError(error))
+        }
+    })
+
+    expect(ball.flavor).toBe(BallFlavor.vanilla)
+    expect(ball.size).toBe(Size.big)
 })

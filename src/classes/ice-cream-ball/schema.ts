@@ -11,4 +11,15 @@ export const schema = z.object({
         z.nativeEnum(Size, {
             message: "Invalid Size"
         })
-})
+}).strict()
+
+export const updateBallSchema = z.object({
+    flavor:
+        z.nativeEnum(BallFlavor, {
+            message: "Invalid Flavor"
+        }).optional(),
+    size:
+        z.nativeEnum(Size, {
+            message: "Invalid Size"
+        }).optional()
+}).strict()

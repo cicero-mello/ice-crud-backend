@@ -12,4 +12,4 @@ export const schema = z.object({
         z.nativeEnum(Size, {
             message: "Invalid Size"
         })
-})
+}).strict()
