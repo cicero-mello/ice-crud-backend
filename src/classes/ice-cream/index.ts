@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid"
 import * as T from "./types"
+import * as schema from "./schemas"
 import {
-    IceCreamBallConstructor,
     IceCreamBall,
     IceCreamCup,
     IceCreamCone
@@ -27,33 +27,30 @@ export class IceCream {
     }
 
     rename (name: string) {
+        schema.name.parse(name)
         this.props.name = name
     }
 
-    addBall (ball: IceCreamBallConstructor) {
-        this.props.balls.push(new IceCreamBall(ball))
-    }
-
-    updateBall (ballId: string, update: Partial<IceCreamBallConstructor>) {
-        const index = this.props.balls.findIndex(
-            (ball) => ball.id === ballId
-        )
-        if (index !== -1) {
-            this.props.balls[index].updateBall(update)
-        }
+    addBall (ball: IceCreamBall) {
+        schema.addBall.parse(ball)
+        this.props.balls.push(ball)
     }
 
     removeBall (ballId: string) {
+        schema.removeBall.parse(ballId)
         this.props.balls = this.props.balls.filter(
             (ball) => ball.id !== ballId
         )
     }
 
     updateBase (base: IceCreamCone | IceCreamCup) {
+        schema.updateBase.parse(base)
         this.props.base = base
     }
 
     constructor (props: T.IceCreamConstructor) {
+        schema.base.parse(props)
+
         this.props = {
             balls: props.balls,
             base: props.base,
