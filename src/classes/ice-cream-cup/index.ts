@@ -1,4 +1,5 @@
-import { Size } from "../types"
+import { Size } from "../../types"
+import { schema } from "./schema"
 
 export interface IceCreamCupProps {
     size: Size
@@ -14,6 +15,7 @@ export class IceCreamCup {
     }
 
     constructor (props: IceCreamCupConstructor) {
+        schema.parse(props)
         this.props = props
     }
 }
