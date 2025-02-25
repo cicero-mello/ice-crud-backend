@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { schema, updateBallSchema } from "./schema"
+import * as schema from "./schemas"
 import * as T from "./types"
 
 export class IceCreamBall {
@@ -18,14 +18,14 @@ export class IceCreamBall {
     }
 
     updateBall (update: Partial<T.IceCreamBallConstructor>) {
-        updateBallSchema.parse(update)
+        schema.updateBall.parse(update)
 
         this.props.size = update.size ?? this.props.size
         this.props.flavor = update.flavor ?? this.props.flavor
     }
 
     constructor (props: T.IceCreamBallConstructor) {
-        schema.parse(props)
+        schema.base.parse(props)
 
         this.props = {
             flavor: props.flavor,

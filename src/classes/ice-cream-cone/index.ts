@@ -1,4 +1,4 @@
-import { schema } from "./schema"
+import * as schema from "./schemas"
 import * as T from "./types"
 
 export class IceCreamCone {
@@ -13,7 +13,7 @@ export class IceCreamCone {
     }
 
     constructor (props: T.IceCreamConeConstructor) {
-        schema.parse(props)
+        schema.base.parse(props)
         this.props = props
     }
 }

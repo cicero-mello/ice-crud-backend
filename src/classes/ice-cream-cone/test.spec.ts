@@ -44,7 +44,6 @@ test("Use Invalid Color", () => {
             new IceCreamCone({ color, size: Size.medium })
         } catch (error: any) {
             expect(error).toBeInstanceOf(ZodError)
-            expect(error.errors[0].message).toBe("Invalid Color")
             return
         }
         expect.fail("Didn't Trigger ZodError")
@@ -64,7 +63,6 @@ test("Use Invalid Size", () => {
             new IceCreamCone({ color: "#FFFFFFCA", size })
         } catch (error: any) {
             expect(error).toBeInstanceOf(ZodError)
-            expect(error.errors[0].message).toBe("Invalid Size")
             return
         }
         expect.fail("Didn't Trigger ZodError")

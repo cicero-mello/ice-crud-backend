@@ -2,11 +2,11 @@ import { z } from "zod"
 import { Size } from "#types"
 import { hexColorRegex } from "#utils"
 
-export const schema = z.object({
+export const base = z.object({
     color:
-        z.string({ message: "Invalid Color"})
+        z.string({ message: "Color Must be String Type"})
         .regex(hexColorRegex, {
-            message: "Invalid Color",
+            message: "Color Must be Hex",
         }),
     size:
         z.nativeEnum(Size, {
