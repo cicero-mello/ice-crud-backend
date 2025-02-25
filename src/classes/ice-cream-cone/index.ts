@@ -1,4 +1,5 @@
-import { Size } from "../types"
+import { Size } from "../../types"
+import { schema } from "./schema"
 
 export interface IceCreamConeProps {
     color: string
@@ -19,6 +20,7 @@ export class IceCreamCone {
     }
 
     constructor (props: IceCreamConeConstructor) {
+        schema.parse(props)
         this.props = props
     }
 }

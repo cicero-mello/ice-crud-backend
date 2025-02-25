@@ -1,6 +1,8 @@
-export type Size = (
-    "small" | "medium" | "big"
-)
+export enum Size {
+    small,
+    medium,
+    big
+}
 
 export enum Avatar {
     AfroBusinessMan,

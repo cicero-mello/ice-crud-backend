@@ -1,5 +1,5 @@
 import { IceCreamBall, IceCreamBallConstructor } from "./ice-cream-ball"
-import { IceCreamCone } from "./cone"
+import { IceCreamCone } from "./ice-cream-cone"
 import { IceCreamCup } from "./cup"
 import { nanoid } from "nanoid"
 
