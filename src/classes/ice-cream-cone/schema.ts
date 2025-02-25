@@ -1,6 +1,6 @@
 import { z } from "zod"
-import { Size } from "../../types"
-import { hexColorRegex } from "../../utils"
+import { Size } from "#types"
+import { hexColorRegex } from "#utils"
 
 export const schema = z.object({
     color:

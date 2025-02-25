@@ -1,20 +1,14 @@
-import { Size } from "../../types"
 import { schema } from "./schema"
-
-export interface IceCreamCupProps {
-    size: Size
-}
-
-export type IceCreamCupConstructor = IceCreamCupProps
+import * as T from "./types"
 
 export class IceCreamCup {
-    private readonly props: IceCreamCupProps
+    private readonly props: T.IceCreamCupProps
 
     get size () {
         return this.props.size
     }
 
-    constructor (props: IceCreamCupConstructor) {
+    constructor (props: T.IceCreamCupConstructor) {
         schema.parse(props)
         this.props = props
     }

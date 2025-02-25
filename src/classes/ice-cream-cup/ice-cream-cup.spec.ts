@@ -1,6 +1,7 @@
+import { getMinAndMaxNumberFromEnum } from "#utils"
 import { expect, test } from "vitest"
 import { IceCreamCup } from "."
-import { Size } from "../../types"
+import { Size } from "#types"
 import { ZodError } from "zod"
 
 test("Create Class", () => {
@@ -10,7 +11,7 @@ test("Create Class", () => {
     try {
         cup = new IceCreamCup({ size })
     } catch (error) {
-        expect.fail("Creation Error")
+        expect.fail("Creation Class Error")
     }
 
     expect(cup).toBeInstanceOf(IceCreamCup)
@@ -23,19 +24,19 @@ test("Read Props", () => {
     try {
         cup = new IceCreamCup({ size })
     } catch (error) {
-        expect.fail("Creation Error")
+        expect.fail("Creation Class Error")
     }
 
     expect(cup.size).toEqual(size)
 })
 
 test("Use Invalid Size", () => {
-    const sizeInNumbers = (
-        Object.values(Size).filter(v => typeof v === "number") as number[]
-    )
-    const maxSize = Math.max(...sizeInNumbers)
-    const minSize = Math.min(...sizeInNumbers)
-    const invalidSizes = [maxSize + 1, minSize - 1, "a", null, undefined]
+    const size = getMinAndMaxNumberFromEnum(Size)
+    const invalidSizes = [
+        size.max + 1,
+        size.min - 1,
+        "a", null, undefined
+    ]
 
     void invalidSizes.forEach((size: any) => {
         try {

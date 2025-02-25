@@ -1,21 +1,24 @@
 {
-  "name": "ice-crud-backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "vitest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "description": "",
-  "devDependencies": {
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.7",
-    "zod": "^3.24.2"
-  },
-  "dependencies": {
-    "nanoid": "^5.1.2"
-  }
+    "name": "ice-crud-backend",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "vitest"
+    },
+    "imports": {
+        "#*": "./src/*"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "description": "",
+    "devDependencies": {
+        "typescript": "^5.7.3",
+        "vitest": "^3.0.7",
+        "zod": "^3.24.2"
+    },
+    "dependencies": {
+        "nanoid": "^5.1.2"
+    }
 }

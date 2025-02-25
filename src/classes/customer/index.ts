@@ -1,21 +1,9 @@
-import { IceCream } from "./ice-cream"
-import { Avatar } from "../types"
+import { IceCream } from "../ice-cream"
 import { nanoid } from "nanoid"
-
-export interface CustomerProps {
-    id: string
-    name: string
-    iceCreams: IceCream[]
-    avatar: Avatar
-}
-
-export type CustomerConstructor = Omit<
-    CustomerProps,
-    "id" | "iceCreams"
->
+import * as T from "./types"
 
 export class Customer {
-    private readonly props: CustomerProps
+    private readonly props: T.CustomerProps
 
     get id () {
         return this.props.id
@@ -43,7 +31,7 @@ export class Customer {
         )
     }
 
-    constructor (props: CustomerConstructor) {
+    constructor (props: T.CustomerConstructor) {
         this.props = {
             name: props.name,
             avatar: props.avatar,

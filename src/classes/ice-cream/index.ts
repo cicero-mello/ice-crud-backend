@@ -1,22 +1,14 @@
-import { IceCreamBall, IceCreamBallConstructor } from "./ice-cream-ball"
-import { IceCreamCone } from "./ice-cream-cone"
-import { IceCreamCup } from "./ice-cream-cup"
 import { nanoid } from "nanoid"
-
-export interface IceCreamProps {
-    id: string
-    name: string
-    balls: IceCreamBall[]
-    base: IceCreamCone | IceCreamCup
-}
-
-export type IceCreamConstructor = Omit<
-    IceCreamProps,
-    "id"
->
+import * as T from "./types"
+import {
+    IceCreamBallConstructor,
+    IceCreamBall,
+    IceCreamCup,
+    IceCreamCone
+} from "#classes"
 
 export class IceCream {
-    private readonly props: IceCreamProps
+    private readonly props: T.IceCreamProps
 
     get id () {
         return this.props.id
@@ -61,7 +53,7 @@ export class IceCream {
         this.props.base = base
     }
 
-    constructor (props: IceCreamConstructor) {
+    constructor (props: T.IceCreamConstructor) {
         this.props = {
             balls: props.balls,
             base: props.base,
