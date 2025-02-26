@@ -32,6 +32,8 @@ describe("IceCreamCone", () => {
 
         expect(color).toBe(cone.color)
         expect(size).toBe(cone.size)
+        expect(cone.id).toBeTypeOf("string")
+        expect(cone.id.length).toBeGreaterThan(20)
     })
 
     test("Use Invalid Color", () => {

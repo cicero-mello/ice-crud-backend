@@ -22,6 +22,8 @@ describe("IceCreamCup", () => {
         const size = Size.big
         let cup = new IceCreamCup({ size })
         expect(cup.size).toEqual(size)
+        expect(cup.id).toBeTypeOf("string")
+        expect(cup.id.length).toBeGreaterThan(20)
     })
 
     test("Use Invalid Size", () => {
