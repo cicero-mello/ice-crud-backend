@@ -1,51 +1,46 @@
 import { getMinAndMaxNumberFromEnum } from "#utils"
-import { expect, test } from "vitest"
+import { describe, expect, test } from "vitest"
 import { IceCreamCup } from "."
 import { Size } from "#types"
 import { ZodError } from "zod"
 
-test("Create Class", () => {
-    const size = Size.big
+describe("IceCreamCup", () => {
+    test("Create Class", () => {
+        const size = Size.big
 
-    let cup
-    try {
-        cup = new IceCreamCup({ size })
-    } catch (error) {
-        expect.fail("Creation Class Error")
-    }
-
-    expect(cup).toBeInstanceOf(IceCreamCup)
-})
-
-test("Read Props", () => {
-    const size = Size.big
-
-    let cup
-    try {
-        cup = new IceCreamCup({ size })
-    } catch (error) {
-        expect.fail("Creation Class Error")
-    }
-
-    expect(cup.size).toEqual(size)
-})
-
-test("Use Invalid Size", () => {
-    const size = getMinAndMaxNumberFromEnum(Size)
-    const invalidSizes = [
-        size.max + 1,
-        size.min - 1,
-        "a", null, undefined
-    ]
-
-    void invalidSizes.forEach((size: any) => {
+        let cup
         try {
-            new IceCreamCup({ size })
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(ZodError)
-            expect(error.errors[0].message).toBe("Invalid Size")
-            return
+            cup = new IceCreamCup({ size })
+        } catch (error) {
+            expect.fail("Creation Class Error")
         }
-        expect.fail("Didn't Trigger ZodError")
+
+        expect(cup).toBeInstanceOf(IceCreamCup)
+    })
+
+    test("Read Props", () => {
+        const size = Size.big
+        let cup = new IceCreamCup({ size })
+        expect(cup.size).toEqual(size)
+    })
+
+    test("Use Invalid Size", () => {
+        const size = getMinAndMaxNumberFromEnum(Size)
+        const invalidSizes = [
+            size.max + 1,
+            size.min - 1,
+            "a", null, undefined
+        ]
+
+        void invalidSizes.forEach((size: any) => {
+            try {
+                new IceCreamCup({ size })
+            } catch (error: any) {
+                expect(error).toBeInstanceOf(ZodError)
+                expect(error.errors[0].message).toBe("Invalid Size")
+                return
+            }
+            expect.fail("Didn't Trigger ZodError")
+        })
     })
 })
