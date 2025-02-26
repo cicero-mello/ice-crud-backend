@@ -1,6 +1,5 @@
 
 import { test, describe, expect } from "vitest"
-import { Customer } from "#entities"
 import { getError } from "#utils"
 import { CreateCustomer } from "."
 import { Avatar } from "#enums"
@@ -27,8 +26,8 @@ describe("Create Customer", () => {
         }
 
         expect(customerRepo.customers).toHaveLength(2)
-        expect(customerRepo.customers[0]).toBeInstanceOf(Customer)
-        expect(customerRepo.customers[1]).toBeInstanceOf(Customer)
+        expect(customerRepo.customers[0].name).toEqual("valid-username")
+        expect(customerRepo.customers[1].name).toEqual("valid-username2")
     })
 
     test("Create Customer With Invalid Value", async () => {

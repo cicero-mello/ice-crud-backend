@@ -6,8 +6,7 @@ export class CreateCustomer {
 
     async execute (customer: CustomerConstructor) {
         const newCustomer = new Customer(customer)
-        await this.customerRepo.verifyUsernameAvailability(customer.name)
-        await this.customerRepo.addCustomer(newCustomer)
+        await this.customerRepo.create(newCustomer)
     }
 
     constructor(repository: CustomerRepo) {

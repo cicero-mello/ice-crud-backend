@@ -1,7 +1,15 @@
 import { Customer } from "#entities"
+import { Avatar } from "#enums"
+
+export interface CustomerDBRow {
+    id: string
+    name: string
+    pass: string
+    salt: string
+    avatar: Avatar
+}
 
 export interface CustomerRepo {
-    customers: Customer[]
-    addCustomer(customer: Customer): Promise<void>
-    verifyUsernameAvailability(username: string): Promise<void>
+    customers: CustomerDBRow[]
+    create(customer: Customer): Promise<void>
 }
