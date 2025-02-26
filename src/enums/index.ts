@@ -4,6 +4,11 @@ export enum Size {
     big
 }
 
+export enum IceCreamBaseType {
+    Cone,
+    Cup
+}
+
 export enum Avatar {
     AfroBusinessMan,
     AfroBusinessWoman,

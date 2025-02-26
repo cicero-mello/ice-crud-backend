@@ -12,4 +12,5 @@ export interface CustomerDBRow {
 export interface CustomerRepo {
     customers: CustomerDBRow[]
     create(customer: Customer): Promise<void>
+    alreadyExists(customerId: string): Promise<boolean>
 }

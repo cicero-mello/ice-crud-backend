@@ -1,5 +1,8 @@
-import { CustomerDBRow, CustomerRepo } from "#repositories/customer"
 import { Customer } from "#entities"
+import {
+    CustomerDBRow,
+    CustomerRepo
+} from "#repositories"
 
 export class CustomerRepoInMemory implements CustomerRepo {
     public customers: CustomerDBRow[] = []
@@ -7,8 +10,12 @@ export class CustomerRepoInMemory implements CustomerRepo {
     async create({
         id, name, pass, salt, avatar
     }: Customer) {
-        await this.verifyCustomerAlreadyExists(id)
         await this.verifyUsernameAvailability(name)
+        const alreadyExists = await this.alreadyExists(id)
+
+        if (alreadyExists) {
+            throw new Error("Customer Already Exists!")
+        }
 
         this.customers.push({
             id, name, pass, salt, avatar
@@ -27,13 +34,9 @@ export class CustomerRepoInMemory implements CustomerRepo {
         }
     }
 
-    private async verifyCustomerAlreadyExists (id: string) {
-        const customerAlreadyExists = (
-            this.customers.some((customer) => customer.id === id)
+    async alreadyExists(customerId: string) {
+        return this.customers.some(
+            ({ id }) => id === customerId
         )
-
-        if(customerAlreadyExists) {
-            throw new Error("Customer Already Exists!")
-        }
     }
 }
