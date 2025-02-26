@@ -1,7 +1,7 @@
 import { getMinAndMaxNumberFromEnum, getZodError } from "#utils"
 import { generateHash } from "#utils/crypto"
 import { expect, test, describe } from "vitest"
-import { Avatar, Size } from "#types"
+import { Avatar, Size } from "#enums"
 import { ZodError } from "zod"
 import { Customer } from "."
 import {

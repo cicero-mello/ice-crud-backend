@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Size } from "../../types"
+import { Size } from "../../enums"
 import { BallFlavor } from "./types"
 
 export const base = z.object({

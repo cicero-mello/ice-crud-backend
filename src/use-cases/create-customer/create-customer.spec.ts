@@ -3,7 +3,7 @@ import { test, describe, expect } from "vitest"
 import { Customer } from "#entities"
 import { getError } from "#utils"
 import { CreateCustomer } from "."
-import { Avatar } from "#types"
+import { Avatar } from "#enums"
 import { CustomerRepoInMemory } from "#repositories/in-memory"
 
 describe("Create Customer", () => {

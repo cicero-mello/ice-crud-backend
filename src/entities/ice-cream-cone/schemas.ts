@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Size } from "#types"
+import { Size } from "#enums"
 import { hexColorRegex } from "#utils"
 
 export const base = z.object({

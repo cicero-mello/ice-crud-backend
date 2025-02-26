@@ -1,4 +1,4 @@
-import { Size } from "#types"
+import { Size } from "#enums"
 
 export interface IceCreamBallProps {
     id: string

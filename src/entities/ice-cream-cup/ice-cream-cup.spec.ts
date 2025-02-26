@@ -1,7 +1,7 @@
 import { getMinAndMaxNumberFromEnum } from "#utils"
 import { describe, expect, test } from "vitest"
 import { IceCreamCup } from "."
-import { Size } from "#types"
+import { Size } from "#enums"
 import { ZodError } from "zod"
 
 describe("IceCreamCup", () => {

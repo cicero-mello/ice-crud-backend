@@ -1,4 +1,4 @@
-import { Avatar } from "#types"
+import { Avatar } from "#enums"
 import { z } from "zod"
 import { IceCream } from "#entities"
 import {

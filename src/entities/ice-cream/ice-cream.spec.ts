@@ -1,4 +1,4 @@
-import { Size } from "#types"
+import { Size } from "#enums"
 import { describe, expect, test } from "vitest"
 import { IceCream } from "."
 import { getZodError } from "#utils"

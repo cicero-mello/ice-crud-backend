@@ -1,5 +1,5 @@
 import { IceCream } from "#entities/ice-cream"
-import { Avatar } from "#types"
+import { Avatar } from "#enums"
 
 export interface CustomerProps {
     id: string
