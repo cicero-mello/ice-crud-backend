@@ -1,6 +1,6 @@
 import { Avatar } from "#types"
 import { z } from "zod"
-import { IceCream } from "#classes"
+import { IceCream } from "#entities"
 import {
     noScriptPattern,
     usernameSpecialCharacters

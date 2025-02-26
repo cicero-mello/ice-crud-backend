@@ -1,6 +1,6 @@
-import { IceCreamBall } from "#classes/ice-cream-ball"
-import { IceCreamCone } from "#classes/ice-cream-cone"
-import { IceCreamCup } from "#classes/ice-cream-cup"
+import { IceCreamBall } from "#entities/ice-cream-ball"
+import { IceCreamCone } from "#entities/ice-cream-cone"
+import { IceCreamCup } from "#entities/ice-cream-cup"
 
 export interface IceCreamProps {
     id: string

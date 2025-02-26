@@ -1,4 +1,4 @@
-import { IceCream } from "#classes/ice-cream"
+import { IceCream } from "#entities/ice-cream"
 import { Avatar } from "#types"
 
 export interface CustomerProps {

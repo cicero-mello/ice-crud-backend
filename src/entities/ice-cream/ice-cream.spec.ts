@@ -8,7 +8,7 @@ import {
     BallFlavor,
     IceCreamCone,
     IceCreamCup
-} from "#classes"
+} from "#entities"
 
 const createClass = () => {
     const name = "Meu sorvetão"

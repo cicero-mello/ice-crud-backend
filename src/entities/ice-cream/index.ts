@@ -5,7 +5,7 @@ import {
     IceCreamBall,
     IceCreamCup,
     IceCreamCone
-} from "#classes"
+} from "#entities"
 
 export class IceCream {
     private readonly props: T.IceCreamProps

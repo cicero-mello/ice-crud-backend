@@ -10,7 +10,7 @@ import {
     BallFlavor,
     IceCreamCone,
     IceCreamCup
-} from "#classes"
+} from "#entities"
 
 test("Create Class", () => {
     const name = "cicero-mello"

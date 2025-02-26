@@ -1,7 +1,7 @@
 import { getMinAndMaxNumberFromEnum, getZodError } from "#utils"
 import { expect, test } from "vitest"
 import { BallFlavor } from "./types"
-import { IceCreamBall } from "./"
+import { IceCreamBall } from "."
 import { Size } from "#types"
 import { ZodError } from "zod"
 
