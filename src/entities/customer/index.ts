@@ -15,8 +15,8 @@ export class Customer {
         return this.props.name
     }
 
-    get pass () {
-        return this.props.pass
+    get hash () {
+        return this.props.hash
     }
 
     get salt () {
@@ -45,18 +45,22 @@ export class Customer {
     }
 
     constructor (props: T.CustomerConstructor) {
+        if(!props.pass && !props.hash){
+            throw new Error("Missing pass or hash")
+        }
+
         schema.base.parse(props)
 
-        const salt = generateSalt()
-        const pass = generateHash(props.pass, salt)
+        const salt = props.salt ?? generateSalt()
+        const hash = props.hash ?? generateHash(props.pass!, salt)
 
         this.props = {
             name: props.name,
-            pass: pass,
+            hash: hash,
             salt: salt,
             avatar: props.avatar,
-            id: nanoid(),
-            iceCreams: []
+            id: props.id ?? nanoid(),
+            iceCreams: props.iceCreams ?? []
         }
     }
 }

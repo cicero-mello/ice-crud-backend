@@ -4,13 +4,19 @@ import { Avatar } from "#enums"
 export interface CustomerProps {
     id: string
     name: string
-    pass: string
+    hash: string
     salt: string
     iceCreams: IceCream[]
     avatar: Avatar
 }
 
-export type CustomerConstructor = Omit<
-    CustomerProps,
-    "id" | "iceCreams" | "salt"
->
+export interface CustomerConstructor {
+    name: string
+    avatar: Avatar
+    pass?: string
+
+    id?: string
+    iceCreams?: IceCream[]
+    salt?: string
+    hash?: string
+}

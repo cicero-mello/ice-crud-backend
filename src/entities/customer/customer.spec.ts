@@ -1,5 +1,5 @@
-import { getMinAndMaxNumberFromEnum, getZodError } from "#utils"
-import { generateHash } from "#utils/crypto"
+import { getError, getMinAndMaxNumberFromEnum, getZodError } from "#utils"
+import { generateHash, generateSalt } from "#utils/crypto"
 import { expect, test, describe } from "vitest"
 import { Avatar, Size } from "#enums"
 import { ZodError } from "zod"
@@ -11,6 +11,7 @@ import {
     IceCreamCone,
     IceCreamCup
 } from "#entities"
+import { nanoid } from "nanoid"
 
 describe("Customer", () => {
     test("Create Class", () => {
@@ -39,8 +40,8 @@ describe("Customer", () => {
 
         expect(customer.name).toEqual(name)
 
-        expect(customer.pass).toBeTypeOf("string")
-        expect(customer.pass.length).toEqual(64)
+        expect(customer.hash).toBeTypeOf("string")
+        expect(customer.hash.length).toEqual(64)
 
         expect(customer.salt).toBeTypeOf("string")
         expect(customer.salt.length).toEqual(16)
@@ -138,7 +139,7 @@ describe("Customer", () => {
             try {
                 new Customer({ avatar, name, pass })
             } catch (error) {
-                expect(error).toBeInstanceOf(ZodError)
+                expect(!!error).toEqual(true)
                 return
             }
             expect.fail("Didn't Trigger ZodError")
@@ -158,7 +159,7 @@ describe("Customer", () => {
             pass, customer.salt
         )
 
-        expect(newHash).toEqual(customer.pass)
+        expect(newHash).toEqual(customer.hash)
     })
 
     test("Add Valid Ice Creams", () => {
@@ -343,4 +344,41 @@ describe("Customer", () => {
         })
     })
 
+    test("Create Class With Full Props", () => {
+        const name = "Osaka"
+        const pass = "esukareta-erebeta"
+        const avatar = Avatar.AsianYoungWoman
+        const id = nanoid()
+        const salt = generateSalt()
+        const hash = generateHash(pass, salt)
+        const iceCreams = [
+            new IceCream({
+                balls: [new IceCreamBall({
+                    flavor: BallFlavor.chocolate,
+                    size: Size.big
+                })],
+                base: new IceCreamCup({
+                    size: Size.big
+                }),
+                name: "sorvete"
+            })
+        ]
+
+        let customer
+        try {
+            customer = new Customer({
+                avatar, name, pass,
+                iceCreams, salt, id
+            })
+        } catch (error) {
+            expect.fail(getError(error))
+        }
+
+        expect(customer.name).toEqual(name)
+        expect(customer.hash).toEqual(hash)
+        expect(customer.avatar).toEqual(avatar)
+        expect(customer.id).toEqual(id)
+        expect(customer.salt).toEqual(salt)
+        expect(customer.iceCreams).toEqual(iceCreams)
+    })
 })

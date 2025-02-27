@@ -29,13 +29,34 @@ export const base = z.object({
         })
         .regex(noScriptPattern, {
             message: "Password has a suspicious script pattern"
-        }),
+        }).optional(),
     avatar: z.nativeEnum(Avatar, {
         message: "Invalid Avatar"
-    })
-})
+    }),
 
-export const addIceCream = z.instanceof(IceCream,{
+    id: z
+        .string({ message: "Id must be string" })
+        .min(20, { message: "This id is too short to be valid" })
+        .optional(),
+    salt: z
+        .string({ message: "Salt must be string" })
+        .length(16, { message: "Invalid salt length" })
+        .optional(),
+    iceCreams: z
+        .array(
+            z.instanceof(
+                IceCream,
+                { message: "Must be a instance of IceCream " }
+            )
+        )
+        .optional(),
+    hash: z
+        .string({ message: "Hash must be string" })
+        .length(32, { message: "Invalid hash length" })
+        .optional()
+}).strict()
+
+export const addIceCream = z.instanceof(IceCream, {
     message: "Invalid Ice Cream"
 })
 
