@@ -4,13 +4,17 @@ import { Avatar } from "#enums"
 export interface CustomerDBRow {
     id: string
     name: string
-    pass: string
+    hash: string
     salt: string
     avatar: Avatar
 }
 
+export interface CreateCustomerRepoParams {
+    customer: Customer
+}
+
 export interface CustomerRepo {
     customers: CustomerDBRow[]
-    create(customer: Customer): Promise<void>
+    create(params: CreateCustomerRepoParams): Promise<CustomerDBRow>
     alreadyExists(customerId: string): Promise<boolean>
 }

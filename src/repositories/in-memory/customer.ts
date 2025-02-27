@@ -1,5 +1,5 @@
-import { Customer } from "#entities"
 import {
+    CreateCustomerRepoParams,
     CustomerDBRow,
     CustomerRepo
 } from "#repositories"
@@ -7,9 +7,9 @@ import {
 export class CustomerRepoInMemory implements CustomerRepo {
     public customers: CustomerDBRow[] = []
 
-    async create({
-        id, name, pass, salt, avatar
-    }: Customer) {
+    async create({ customer }: CreateCustomerRepoParams) {
+        const { name, id, hash, salt, avatar } = customer
+
         await this.verifyUsernameAvailability(name)
         const alreadyExists = await this.alreadyExists(id)
 
@@ -18,8 +18,12 @@ export class CustomerRepoInMemory implements CustomerRepo {
         }
 
         this.customers.push({
-            id, name, pass, salt, avatar
+            id, name, hash, salt, avatar
         })
+
+        return {
+            id, name, hash, salt, avatar
+        }
     }
 
     private async verifyUsernameAvailability(username: string) {

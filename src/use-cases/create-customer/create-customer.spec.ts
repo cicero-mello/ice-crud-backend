@@ -1,17 +1,18 @@
 
+import { CustomerRepoInMemory } from "#repositories/in-memory"
 import { test, describe, expect } from "vitest"
 import { getError } from "#utils"
 import { CreateCustomer } from "."
 import { Avatar } from "#enums"
-import { CustomerRepoInMemory } from "#repositories/in-memory"
 
 describe("Create Customer", () => {
     test("Create Customers With Valid Values", async () => {
         const customerRepo = new CustomerRepoInMemory()
-        const createCustomer = new CreateCustomer(customerRepo)
+        const createCustomer = new CreateCustomer({ customerRepo })
 
+        let createdFirst
         try {
-            await createCustomer.execute({
+            createdFirst = await createCustomer.execute({
                 avatar: Avatar.YoungMan,
                 name: "valid-username",
                 pass: "very-valid-password"
@@ -28,11 +29,28 @@ describe("Create Customer", () => {
         expect(customerRepo.customers).toHaveLength(2)
         expect(customerRepo.customers[0].name).toEqual("valid-username")
         expect(customerRepo.customers[1].name).toEqual("valid-username2")
+
+        expect(createdFirst.customer.name).toEqual("valid-username")
+        expect(createdFirst.customer.avatar).toEqual(Avatar.YoungMan)
+        expect(createdFirst.customerDBRow.name).toEqual("valid-username")
+        expect(createdFirst.customerDBRow.id).toEqual(createdFirst.customer.id)
+        expect(createdFirst.customerDBRow.hash).toEqual(createdFirst.customer.hash)
+        expect(createdFirst.customerDBRow.salt).toEqual(createdFirst.customer.salt)
+        expect(createdFirst.customerDBRow.avatar).toEqual(Avatar.YoungMan)
+
+        expect(customerRepo.customers[0].name).toEqual(createdFirst.customerDBRow.name)
+        expect(customerRepo.customers[0].name).toEqual(createdFirst.customer.name)
+        expect(customerRepo.customers[0].id).toEqual(createdFirst.customerDBRow.id)
+        expect(customerRepo.customers[0].id).toEqual(createdFirst.customer.id)
+        expect(customerRepo.customers[0].hash).toEqual(createdFirst.customerDBRow.hash)
+        expect(customerRepo.customers[0].hash).toEqual(createdFirst.customer.hash)
+        expect(customerRepo.customers[0].salt).toEqual(createdFirst.customerDBRow.salt)
+        expect(customerRepo.customers[0].salt).toEqual(createdFirst.customer.salt)
     })
 
     test("Create Customer With Invalid Value", async () => {
         const customerRepo = new CustomerRepoInMemory()
-        const createCustomer = new CreateCustomer(customerRepo)
+        const createCustomer = new CreateCustomer({ customerRepo })
 
         try {
             await createCustomer.execute({
@@ -49,9 +67,9 @@ describe("Create Customer", () => {
         expect.fail("Didn't Trigger Error")
     })
 
-    test("Create Customer With Already Name Already in Use", async () => {
+    test("Create Customer With Name Already in Use", async () => {
         const customerRepo = new CustomerRepoInMemory()
-        const createCustomer = new CreateCustomer(customerRepo)
+        const createCustomer = new CreateCustomer({ customerRepo })
 
         try {
             await createCustomer.execute({
