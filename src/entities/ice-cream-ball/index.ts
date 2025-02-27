@@ -30,7 +30,7 @@ export class IceCreamBall {
         this.props = {
             flavor: props.flavor,
             size: props.size,
-            id: nanoid()
+            id: props.id ?? nanoid()
         }
     }
 }

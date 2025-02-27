@@ -1,9 +1,10 @@
-import { getMinAndMaxNumberFromEnum, getZodError } from "#utils"
+import { getError, getMinAndMaxNumberFromEnum, getZodError } from "#utils"
 import { describe, expect, test } from "vitest"
 import { BallFlavor } from "./types"
 import { IceCreamBall } from "."
 import { Size } from "#enums"
 import { ZodError } from "zod"
+import { nanoid } from "nanoid"
 
 describe("IceCreamBall", () => {
     test("Create Class", () => {
@@ -34,6 +35,22 @@ describe("IceCreamBall", () => {
         expect(ball.flavor).toEqual(flavor)
         expect(ball.size).toEqual(size)
         expect(ball.id).toBeTypeOf("string")
+    })
+
+    test("Create Class With Id", () => {
+        const id = nanoid()
+        let ball
+        try {
+            ball = new IceCreamBall({
+                flavor: BallFlavor.vanilla,
+                size: Size.medium,
+                id: id
+            })
+        } catch (error: any) {
+            expect.fail(getError(error))
+        }
+
+        expect(ball.id).toEqual(id)
     })
 
     test("Use Invalid Size", () => {

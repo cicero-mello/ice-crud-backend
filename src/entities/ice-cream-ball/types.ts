@@ -6,10 +6,12 @@ export interface IceCreamBallProps {
     size: Size
 }
 
-export type IceCreamBallConstructor = Omit<
-    IceCreamBallProps,
-    "id"
->
+export interface IceCreamBallConstructor {
+    flavor: BallFlavor
+    size: Size
+
+    id?: string
+}
 
 export enum BallFlavor {
     chocolate = 0,
