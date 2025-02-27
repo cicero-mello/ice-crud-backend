@@ -55,7 +55,7 @@ export class IceCream {
             balls: props.balls,
             base: props.base,
             name: props.name,
-            id: nanoid()
+            id: props.id ?? nanoid()
         }
     }
 }

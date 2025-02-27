@@ -9,7 +9,11 @@ export interface IceCreamProps {
     base: IceCreamCone | IceCreamCup
 }
 
-export type IceCreamConstructor = Omit<
-    IceCreamProps,
-    "id"
->
+export interface IceCreamConstructor {
+    name: string
+    balls: IceCreamBall[]
+    base: IceCreamCone | IceCreamCup
+
+    id?: string
+}
+

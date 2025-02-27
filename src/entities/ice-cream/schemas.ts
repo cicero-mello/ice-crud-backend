@@ -27,7 +27,12 @@ export const base = z.object({
             z.instanceof(IceCreamCup, {
                 message: "Invalid Cup"
             })
-        )
+        ),
+
+    id: z
+        .string({ message: "Id must be string" })
+        .min(20, { message: "This id is too short to be valid" })
+        .optional()
 }).strict()
 
 export const addBall = z.instanceof(
@@ -41,7 +46,7 @@ export const removeBall = (z
 )
 
 export const updateBase = (z
-    .instanceof(IceCreamCone,{
+    .instanceof(IceCreamCone, {
         message: "Invalid Cone"
     }).or(
         z.instanceof(IceCreamCup, {

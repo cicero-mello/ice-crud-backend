@@ -1,7 +1,8 @@
 import { Size } from "#enums"
 import { describe, expect, test } from "vitest"
 import { IceCream } from "."
-import { getZodError } from "#utils"
+import { getError, getZodError } from "#utils"
+import { nanoid } from "nanoid"
 import { ZodError } from "zod"
 import {
     IceCreamBall,
@@ -86,6 +87,27 @@ describe("IceCream", () => {
 
         expect(iceCream.id).toBeTypeOf("string")
         expect(iceCream.id.length).toBeGreaterThan(20)
+    })
+
+    test("Create Class With Id", () => {
+        let iceCream
+        const id = nanoid()
+
+        try {
+            iceCream = new IceCream({
+                name: "ice-cream-name",
+                balls: [new IceCreamBall({
+                    flavor: BallFlavor.chocolate,
+                    size: Size.big
+                })],
+                base: new IceCreamCup({ size: Size.big }),
+                id: id
+            })
+        } catch (error) {
+            expect.fail(getError(error))
+        }
+
+        expect(iceCream.id).toEqual(id)
     })
 
     test("Use Invalid Names", () => {
