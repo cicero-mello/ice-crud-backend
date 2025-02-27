@@ -5,7 +5,7 @@ import { getError } from "#utils"
 import { CreateCustomer } from "."
 import { Avatar } from "#enums"
 
-describe("Create Customer", () => {
+describe("Use Cases || Create Customer", () => {
     test("Create Customers With Valid Values", async () => {
         const customerRepo = new CustomerRepoInMemory()
         const createCustomer = new CreateCustomer({ customerRepo })
@@ -84,7 +84,7 @@ describe("Create Customer", () => {
             })
         } catch (error) {
             expect(customerRepo.customers).toHaveLength(1)
-            expect(getError(error)).toEqual("The username is already in use")
+            expect(getError(error)).toEqual("This username is already in use")
             return
         }
         expect.fail("Didn't Trigger Error")

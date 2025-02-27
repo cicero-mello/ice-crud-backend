@@ -1,2 +1,0 @@
-- Receba o id do usuario
-- Retorna a lista de sorvetes dele

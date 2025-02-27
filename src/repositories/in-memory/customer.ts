@@ -12,13 +12,6 @@ export class CustomerRepoInMemory implements CustomerRepo {
     async create({ customer }: CreateCustomerRepoParams) {
         const { name, id, hash, salt, avatar } = customer
 
-        await this.verifyUsernameAvailability(name)
-        const alreadyExists = await this.alreadyExists(id)
-
-        if (alreadyExists) {
-            throw new Error("Customer Already Exists!")
-        }
-
         this.customers.push({
             id, name, hash, salt, avatar
         })
@@ -48,16 +41,10 @@ export class CustomerRepoInMemory implements CustomerRepo {
         }
     }
 
-    private async verifyUsernameAvailability(username: string) {
-        const isUsernameInUse = (
-            this.customers.find((customer) => (
-                customer.name.toLowerCase() === username.toLowerCase()
-            ))
-        )
-
-        if (isUsernameInUse) {
-            throw new Error("The username is already in use")
-        }
+    async usernameIsAvailable(username: string) {
+        return !this.customers.find((customer) => (
+            customer.name.toLowerCase() === username.toLowerCase()
+        ))
     }
 
     async alreadyExists(customerId: string) {
