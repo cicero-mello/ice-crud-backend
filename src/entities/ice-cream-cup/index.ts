@@ -15,9 +15,10 @@ export class IceCreamCup {
 
     constructor (props: T.IceCreamCupConstructor) {
         schema.base.parse(props)
+
         this.props = {
             size: props.size,
-            id: nanoid()
+            id: props.id ?? nanoid()
         }
     }
 }

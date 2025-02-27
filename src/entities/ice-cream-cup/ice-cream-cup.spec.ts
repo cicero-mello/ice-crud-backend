@@ -1,8 +1,9 @@
-import { getMinAndMaxNumberFromEnum } from "#utils"
+import { getError, getMinAndMaxNumberFromEnum } from "#utils"
 import { describe, expect, test } from "vitest"
 import { IceCreamCup } from "."
 import { Size } from "#enums"
 import { ZodError } from "zod"
+import { nanoid } from "nanoid"
 
 describe("IceCreamCup", () => {
     test("Create Class", () => {
@@ -24,6 +25,22 @@ describe("IceCreamCup", () => {
         expect(cup.size).toEqual(size)
         expect(cup.id).toBeTypeOf("string")
         expect(cup.id.length).toBeGreaterThan(20)
+    })
+
+    test("Create Class With Id", () => {
+        const id = nanoid()
+
+        let cup
+        try {
+            cup = new IceCreamCup({
+                size: Size.big,
+                id: id
+            })
+        } catch (error) {
+            expect.fail(getError(error))
+        }
+
+        expect(cup.id).toEqual(id)
     })
 
     test("Use Invalid Size", () => {
