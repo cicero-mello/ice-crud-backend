@@ -1,0 +1,1 @@
+- Retorna Username e avatar
