@@ -1,2 +1,0 @@
-- Cada usuário pode ter até 5 sorvetes
-- Todo sorvete precisa ter uma base e um nome

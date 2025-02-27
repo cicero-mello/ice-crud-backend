@@ -1,6 +1,7 @@
 import { IceCream } from "#entities"
 import { IceCreamBaseType } from "#enums"
 import {
+    CustomerRepo,
     IceCreamBallRepo,
     IceCreamConeRepo,
     IceCreamCupRepo
@@ -13,16 +14,17 @@ export interface IceCreamDBRow {
     baseType: IceCreamBaseType
 }
 
-export interface CreateIceCreamParams {
+export interface CreateIceCreamRepoParams {
     iceCream: IceCream,
     customerId: string,
     iceCreamBallRepo: IceCreamBallRepo
     iceCreamCupRepo: IceCreamCupRepo
     iceCreamConeRepo: IceCreamConeRepo
+    customerRepo: CustomerRepo
 }
 
 export interface IceCreamRepo {
     iceCreams: IceCreamDBRow[]
-    create(params: CreateIceCreamParams): Promise<void>
     alreadyExists(iceCreamId: string): Promise<boolean>
+    create(params: CreateIceCreamRepoParams): Promise<IceCreamDBRow>
 }

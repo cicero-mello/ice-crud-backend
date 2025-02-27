@@ -1,4 +1,7 @@
 - [[Criar usuário]]
-- [[Criar - Remover - Atualizar Sorvete]]
+- [[Criar Sorvete]]
+- [[Remover  Sorvete]]
+- [[Atualizar Sorvete]]
 - [[Obter Dados do Usuário]]
 - [[Obter Sorvetes do Usuário]]
+

@@ -1,7 +1,7 @@
 import { IceCreamCone, IceCreamCup } from "#entities"
 import { IceCreamBaseType } from "#enums"
 import {
-    CreateIceCreamParams,
+    CreateIceCreamRepoParams,
     IceCreamDBRow,
     IceCreamRepo
 } from "#repositories"
@@ -14,8 +14,9 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         customerId,
         iceCreamBallRepo,
         iceCreamConeRepo,
-        iceCreamCupRepo
-    }: CreateIceCreamParams) {
+        iceCreamCupRepo,
+        customerRepo
+    }: CreateIceCreamRepoParams) {
         const { id, name, balls, base } = iceCream
         const alreadyExists = await this.alreadyExists(iceCream.id)
 
@@ -23,11 +24,15 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
             throw new Error("Ice Cream Already Exists!")
         }
 
-        const baseType = this.getBaseType(base)
+        const customerExists = await customerRepo.alreadyExists(
+            customerId
+        )
 
-        this.iceCreams.push({
-            id, name, customerId, baseType
-        })
+        if(!customerExists) {
+            throw new Error("Invalid Customer Id!")
+        }
+
+        const baseType = this.getBaseType(base)
 
         balls.forEach(ball => {
             iceCreamBallRepo.create({
@@ -51,6 +56,14 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         else {
             throw new Error("Invalid Base!")
         }
+
+        this.iceCreams.push({
+            id, name, customerId, baseType
+        })
+
+        return {
+            id, name, customerId, baseType
+        }
     }
 
     async alreadyExists(iceCreamId: string) {
@@ -67,7 +80,7 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         }
 
         if (base instanceof IceCreamCup) {
-            return IceCreamBaseType.Cone
+            return IceCreamBaseType.Cup
         }
 
         throw new Error("Invalid Ice Cream Base!")

@@ -8,17 +8,13 @@
         "type": "tabs",
         "children": [
           {
-            "id": "8b1e22dc8c39020b",
+            "id": "e257e15eca405c19",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Ações do usuário.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Ações do usuário"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Visualização em gráfico"
             }
           }
         ]
@@ -165,10 +161,19 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "8b1e22dc8c39020b",
+  "active": "e257e15eca405c19",
   "lastOpenFiles": [
-    "Casos de Uso/Criar - Remover - Atualizar Sorvete.md",
-    "Ações do usuário.md",
+    "Objetivos.md",
+    "Casos de Uso/Atualizar Sorvete/Atualizar Sorvete.md",
+    "Casos de Uso/Casos de Uso.md",
+    "Casos de Uso/Criar Sorvete.md",
+    "Casos de Uso/Remover  Sorvete.md",
+    "Casos de Uso/Atualizar Sorvete/Atualizar Bola.md",
+    "Casos de Uso/Atualizar Sorvete/Atualizar Base.md",
+    "Casos de Uso/Atualizar Sorvete/Adicionar Bola.md",
+    "Casos de Uso/Atualizar Sorvete/Remover Bola.md",
+    "Casos de Uso/Atualizar Sorvete/Renomear.md",
+    "Casos de Uso/Atualizar Sorvete",
     "Entities/IceCream.md",
     "Entities/Entities.md",
     "Entities/Customer.md",
@@ -177,7 +182,6 @@
     "Entities/Ball.md",
     "Casos de Uso/Criar usuário.md",
     "Casos de Uso/Obter Dados do Usuário.md",
-    "Casos de Uso/Casos de Uso.md",
     "Casos de Uso/Obter Sorvetes do Usuário.md",
     "Casos de Uso"
   ]
