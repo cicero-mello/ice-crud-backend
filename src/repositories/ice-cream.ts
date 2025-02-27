@@ -23,8 +23,13 @@ export interface CreateIceCreamRepoParams {
     customerRepo: CustomerRepo
 }
 
+export interface DeleteIceCreamRepoParams {
+    iceCreamId: string
+}
+
 export interface IceCreamRepo {
     iceCreams: IceCreamDBRow[]
     alreadyExists(iceCreamId: string): Promise<boolean>
     create(params: CreateIceCreamRepoParams): Promise<IceCreamDBRow>
+    delete(params: DeleteIceCreamRepoParams): Promise<void>
 }

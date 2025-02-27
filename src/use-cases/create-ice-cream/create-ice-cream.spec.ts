@@ -7,7 +7,7 @@ import { CreateCustomer } from "#use-cases"
 import { getError } from "#utils"
 
 describe("Use Cases || CreateIceCream", () => {
-    test("Create Class", async () => {
+    test("Create IceCream", async () => {
         const iceCreamRepo = new R.IceCreamRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
@@ -49,7 +49,7 @@ describe("Use Cases || CreateIceCream", () => {
         expect(created.iceCream).toBeInstanceOf(IceCream)
     })
 
-    test("Create Class With Invalid Customer Id", async () => {
+    test("Create IceCream With Invalid Customer Id", async () => {
         const iceCreamRepo = new R.IceCreamRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
