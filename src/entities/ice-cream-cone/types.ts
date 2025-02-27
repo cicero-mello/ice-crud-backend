@@ -6,7 +6,9 @@ export interface IceCreamConeProps {
     size: Size
 }
 
-export type IceCreamConeConstructor = Omit<
-    IceCreamConeProps,
-    "id"
->
+export interface IceCreamConeConstructor {
+    color: string
+    size: Size
+
+    id?: string
+}

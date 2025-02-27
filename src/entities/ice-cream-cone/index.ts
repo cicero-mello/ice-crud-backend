@@ -23,7 +23,7 @@ export class IceCreamCone {
         this.props = {
             color: props.color,
             size: props.size,
-            id: nanoid()
+            id: props.id ?? nanoid()
         }
     }
 }

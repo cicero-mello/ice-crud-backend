@@ -3,6 +3,7 @@ import { describe, expect, test, } from "vitest"
 import { IceCreamCone } from ".."
 import { Size } from "#enums"
 import { ZodError } from "zod"
+import { nanoid } from "nanoid"
 
 describe("IceCreamCone", () => {
     test("Create Class", () => {
@@ -34,6 +35,22 @@ describe("IceCreamCone", () => {
         expect(size).toBe(cone.size)
         expect(cone.id).toBeTypeOf("string")
         expect(cone.id.length).toBeGreaterThan(20)
+    })
+
+    test("Create Class With Id", () => {
+        const id = nanoid()
+        let cone
+        try {
+            cone = new IceCreamCone({
+                color: "#FFFFFF",
+                size: Size.medium,
+                id: id
+            })
+        } catch (error: any) {
+            expect.fail("Creation Class Error")
+        }
+
+        expect(cone.id).toEqual(id)
     })
 
     test("Use Invalid Color", () => {
