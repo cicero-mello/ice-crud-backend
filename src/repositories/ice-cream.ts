@@ -1,11 +1,5 @@
 import { IceCream } from "#entities"
 import { IceCreamBaseType } from "#enums"
-import {
-    CustomerRepo,
-    IceCreamBallRepo,
-    IceCreamConeRepo,
-    IceCreamCupRepo
-} from "#repositories"
 
 export interface IceCreamDBRow {
     id: string
@@ -15,12 +9,9 @@ export interface IceCreamDBRow {
 }
 
 export interface CreateIceCreamRepoParams {
-    iceCream: IceCream,
-    customerId: string,
-    iceCreamBallRepo: IceCreamBallRepo
-    iceCreamCupRepo: IceCreamCupRepo
-    iceCreamConeRepo: IceCreamConeRepo
-    customerRepo: CustomerRepo
+    iceCream: IceCream
+    customerId: string
+    baseType: IceCreamBaseType
 }
 
 export interface DeleteIceCreamRepoParams {

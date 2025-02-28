@@ -14,6 +14,6 @@ export interface CreateIceCreamCupParams {
 
 export interface IceCreamCupRepo {
     iceCreamCups: IceCreamCupDBRow[]
-    create (params: CreateIceCreamCupParams): Promise<void>
+    create (params: CreateIceCreamCupParams): Promise<IceCreamCupDBRow>
     alreadyExists (iceCreamCupId: string): Promise<boolean>
 }

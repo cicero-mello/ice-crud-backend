@@ -12,15 +12,14 @@ export class IceCreamConeRepoInMemory implements IceCreamConeRepo {
         iceCreamId
     }: CreateIceCreamConeParams) {
         const { id, color, size } = iceCreamCone
-        const alreadyExists = await this.alreadyExists(id)
-
-        if(alreadyExists){
-            throw new Error("This Cone Already Exists!")
-        }
 
         this.iceCreamCones.push({
             color, size, id, iceCreamId
         })
+
+        return {
+            color, size, id, iceCreamId
+        }
     }
 
     async alreadyExists(iceCreamConeId: string) {

@@ -15,6 +15,6 @@ export interface CreateIceCreamConeParams {
 
 export interface IceCreamConeRepo {
     iceCreamCones: IceCreamConeDBRow[]
-    create(params: CreateIceCreamConeParams): Promise<void>
+    create(params: CreateIceCreamConeParams): Promise<IceCreamConeDBRow>
     alreadyExists(iceCreamConeId: string): Promise<boolean>
 }

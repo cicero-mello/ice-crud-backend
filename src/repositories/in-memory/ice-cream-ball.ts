@@ -12,15 +12,14 @@ export class IceCreamBallRepoInMemory implements IceCreamBallRepo {
         iceCreamId
     }: CreateIceCreamBallParams) {
         const { flavor, id, size } = iceCreamBall
-        const alreadyExists = await this.alreadyExists(id)
-
-        if(alreadyExists) {
-            throw new Error("This Ice Cream Ball Already Exists!")
-        }
 
         this.iceCreamBalls.push({
             flavor, id, size, iceCreamId
         })
+
+        return {
+            flavor, id, size, iceCreamId
+        }
     }
 
     async alreadyExists(iceCreamBallId: string) {
