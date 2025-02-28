@@ -1,12 +1,12 @@
 import { IceCreamRepo } from "#repositories"
 import * as T from "./types"
-import * as schema from "./schemas"
+import { zodValidate } from "#utils"
 
 export class DeleteIceCream implements T.DeleteIceCreamUseCase {
     public iceCreamRepo: IceCreamRepo
 
     async execute({ iceCreamId }: T.DeleteIceCreamRequest) {
-        schema.base.parse({ iceCreamId })
+        zodValidate.id.parse(iceCreamId)
         this.iceCreamRepo.delete({ iceCreamId })
     }
 

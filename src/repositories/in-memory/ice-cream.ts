@@ -25,18 +25,12 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
     async delete({
         iceCreamId
     }: DeleteIceCreamRepoParams) {
-        const iceCreamExists = await this.alreadyExists(
-            iceCreamId
-        )
-
-        if (!iceCreamExists) {
-            throw new Error("This id does not match an existing Ice Cream!")
-        }
-
         const index = this.iceCreams.findIndex(
             ({ id }) => id === iceCreamId
         )
-
+        if (index === -1) {
+            throw new Error("This id does not match an existing Ice Cream!")
+        }
         this.iceCreams.splice(index, 1)
     }
 
