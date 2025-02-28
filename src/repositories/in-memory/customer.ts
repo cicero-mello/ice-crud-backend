@@ -24,15 +24,13 @@ export class CustomerRepoInMemory implements CustomerRepo {
     async getById(
         { customerId }: GetByIdCustomerRepoParams
     ): Promise<CustomerData> {
-        const alreadyExists = await this.alreadyExists(customerId)
-
-        if (!alreadyExists) {
-            throw new Error("Customer Doesn't Exists!")
-        }
-
         const targetCustomer = this.customers.find(
             ({ id }) => id === customerId
-        )!
+        )
+
+        if(!targetCustomer){
+            throw new Error("Customer not found!")
+        }
 
         return {
             avatar: targetCustomer.avatar,
