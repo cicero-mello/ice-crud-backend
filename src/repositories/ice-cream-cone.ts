@@ -34,5 +34,9 @@ export interface IceCreamConeRepo {
     getByIceCream(
         iceCreamId: string
     ): Promise<IceCreamConeResponse>
+    deleteByIceCream(
+        iceCreamId: string
+    ): Promise<void>
     alreadyExists(iceCreamConeId: string): Promise<boolean>
+    iceCreamHaveCone(iceCreamId: string): Promise<boolean>
 }

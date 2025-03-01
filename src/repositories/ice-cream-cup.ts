@@ -31,7 +31,9 @@ export interface IceCreamCupRepo {
         params: UpdateIceCreamCupParams
     ): Promise<IceCreamCupResponse>
     alreadyExists(iceCreamCupId: string): Promise<boolean>
+    deleteByIceCream(iceCreamId: string): Promise<void>
     getByIceCream(iceCreamId: string): Promise<
         IceCreamCupResponse
     >
+    iceCreamHaveCup(iceCreamId: string): Promise<boolean>
 }

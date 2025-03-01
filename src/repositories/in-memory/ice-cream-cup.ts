@@ -31,7 +31,7 @@ export class IceCreamCupRepoInMemory implements IceCreamCupRepo {
         const { id, size } = iceCreamCup
 
         this.iceCreamCups = this.iceCreamCups.map((cup) => {
-            if (cup.id === id) {
+            if (cup.iceCreamId === iceCreamId) {
                 return { id, iceCreamId, size }
             }
             return cup
@@ -44,7 +44,7 @@ export class IceCreamCupRepoInMemory implements IceCreamCupRepo {
     }
 
     async getByIceCream(iceCreamId: string): Promise<
-    IceCreamCupResponse
+        IceCreamCupResponse
     > {
         const cup = this.iceCreamCups.find((cup) => (
             cup.iceCreamId === iceCreamId
@@ -61,6 +61,18 @@ export class IceCreamCupRepoInMemory implements IceCreamCupRepo {
                 id: cup.id
             })
         }
+    }
+
+    async deleteByIceCream(iceCreamId: string){
+        this.iceCreamCups = this.iceCreamCups.filter(cup => (
+            cup.iceCreamId != iceCreamId
+        ))
+    }
+
+    async iceCreamHaveCup(iceCreamId: string): Promise<boolean> {
+        return this.iceCreamCups.some(
+            (cup) => cup.iceCreamId === iceCreamId
+        )
     }
 
     async alreadyExists(iceCreamCupId: string) {
