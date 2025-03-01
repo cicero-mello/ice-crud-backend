@@ -31,6 +31,7 @@ export interface IceCreamBallRepo {
     update(
         params: UpdateIceCreamBallParams
     ): Promise<IceCreamBallResponse>
+    delete(iceCreamId: string): Promise<void>
     alreadyExists(iceCreamBallId: string): Promise<boolean>
     getByIceCream(
         iceCreamId: string

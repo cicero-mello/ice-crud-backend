@@ -25,6 +25,16 @@ export class IceCreamBallRepoInMemory implements IceCreamBallRepo {
         }
     }
 
+    async delete(iceCreamId: string): Promise<void> {
+        const index = this.iceCreamBalls.findIndex(
+            ({ id }) => id === iceCreamId
+        )
+        if (index === -1) {
+            throw new Error("This id does not match an existing Ice Cream Ball!")
+        }
+        this.iceCreamBalls.splice(index, 1)
+    }
+
     async update({
         iceCreamBall,
         iceCreamId
