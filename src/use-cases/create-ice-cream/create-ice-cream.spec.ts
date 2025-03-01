@@ -8,11 +8,16 @@ import { getError } from "#utils"
 
 describe("Use Cases || CreateIceCream", () => {
     test("Create IceCream", async () => {
-        const iceCreamRepo = new R.IceCreamRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
         const customerRepo = new R.CustomerRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
+
 
         const createCustomer = new CreateCustomer({ customerRepo })
         const { customer } = await createCustomer.execute({
@@ -50,11 +55,15 @@ describe("Use Cases || CreateIceCream", () => {
     })
 
     test("Create IceCream With Invalid Customer Id", async () => {
-        const iceCreamRepo = new R.IceCreamRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
         const customerRepo = new R.CustomerRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
 
         const createCustomer = new CreateCustomer({ customerRepo })
         const { customer } = await createCustomer.execute({
@@ -93,11 +102,15 @@ describe("Use Cases || CreateIceCream", () => {
     })
 
     test("Read Created Data", async () => {
-        const iceCreamRepo = new R.IceCreamRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
         const customerRepo = new R.CustomerRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
 
         const createCustomer = new CreateCustomer({ customerRepo })
         const { customer } = await createCustomer.execute({

@@ -12,9 +12,26 @@ export interface CreateIceCreamCupParams {
     iceCreamId: string
 }
 
+export interface UpdateIceCreamCupParams {
+    iceCreamCup: IceCreamCup
+    iceCreamId: string
+}
+
+export interface IceCreamCupResponse {
+    iceCreamCup: IceCreamCup
+    iceCreamCupDBRow: IceCreamCupDBRow
+}
+
 export interface IceCreamCupRepo {
     iceCreamCups: IceCreamCupDBRow[]
-    create (params: CreateIceCreamCupParams): Promise<IceCreamCupDBRow>
-    alreadyExists (iceCreamCupId: string): Promise<boolean>
-    getByIceCream(iceCreamId: string): Promise<IceCreamCupDBRow>
+    create(
+        params: CreateIceCreamCupParams
+    ): Promise<IceCreamCupDBRow>
+    update(
+        params: UpdateIceCreamCupParams
+    ): Promise<IceCreamCupResponse>
+    alreadyExists(iceCreamCupId: string): Promise<boolean>
+    getByIceCream(iceCreamId: string): Promise<
+        IceCreamCupResponse
+    >
 }

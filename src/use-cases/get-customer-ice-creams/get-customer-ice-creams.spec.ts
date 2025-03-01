@@ -16,10 +16,14 @@ import {
 describe("Use Cases || GetCustomerIceCreams", () => {
     test("Get With Valid/Invalid Customer Id", async () => {
         const customerRepo = new R.CustomerRepoInMemory()
-        const iceCreamRepo = new R.IceCreamRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
 
         const createCustomer = new CreateCustomer({
             customerRepo: customerRepo

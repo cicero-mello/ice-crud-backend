@@ -1,5 +1,7 @@
+import { IceCreamCone } from "#entities"
 import {
     CreateIceCreamConeParams,
+    IceCreamConeResponse,
     IceCreamConeDBRow,
     IceCreamConeRepo
 } from "#repositories"
@@ -22,16 +24,44 @@ export class IceCreamConeRepoInMemory implements IceCreamConeRepo {
         }
     }
 
-    async getByIceCream (iceCreamId: string) {
+    async update({
+        iceCreamCone,
+        iceCreamId
+    }: CreateIceCreamConeParams): Promise<IceCreamConeResponse> {
+        const { id, color, size } = iceCreamCone
+
+        this.iceCreamCones = this.iceCreamCones.map((cone) => {
+            if (cone.id === id) {
+                return { id, iceCreamId, color, size }
+            }
+            return cone
+        })
+
+        return {
+            iceCreamConeDBRow: { id, iceCreamId, color, size },
+            iceCreamCone: iceCreamCone
+        }
+    }
+
+    async getByIceCream(iceCreamId: string): Promise<
+        IceCreamConeResponse
+    > {
         const cone = this.iceCreamCones.find((cone) => (
             cone.iceCreamId === iceCreamId
         ))
 
-        if(!cone) {
+        if (!cone) {
             throw new Error("This Ice Cream Doesn't Have Cone!")
         }
 
-        return cone
+        return {
+            iceCreamConeDBRow: cone,
+            iceCreamCone: new IceCreamCone({
+                color: cone.color,
+                size: cone.size,
+                id: cone.id
+            }),
+        }
     }
 
     async alreadyExists(iceCreamConeId: string) {

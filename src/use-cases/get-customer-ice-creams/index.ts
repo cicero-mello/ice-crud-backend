@@ -60,22 +60,22 @@ export class GetCustomerIceCreams implements T.GetCustomerIceCreamsUseCase {
         iceCreamId: string
     ): Promise<E.IceCreamCupProps | E.IceCreamConeProps> {
         if (baseType === IceCreamBaseType.Cone) {
-            const response = await this.iceCreamConeRepo.getByIceCream(
+            const { iceCreamCone } = await this.iceCreamConeRepo.getByIceCream(
                 iceCreamId
             )
             return {
-                color: response.color,
-                id: response.id,
-                size: response.size
+                color: iceCreamCone.color,
+                id: iceCreamCone.id,
+                size: iceCreamCone.size
             }
         }
 
-        const response = await this.iceCreamCupRepo.getByIceCream(
+        const { iceCreamCup } = await this.iceCreamCupRepo.getByIceCream(
             iceCreamId
         )
         return {
-            size: response.size,
-            id: response.id
+            size: iceCreamCup.size,
+            id: iceCreamCup.id
         }
     }
 
@@ -84,10 +84,10 @@ export class GetCustomerIceCreams implements T.GetCustomerIceCreamsUseCase {
             iceCreamId
         )
 
-        return response.map(ball => ({
-            flavor: ball.flavor,
-            id: ball.id,
-            size: ball.size
+        return response.map(({ iceCreamBall }) => ({
+            flavor: iceCreamBall.flavor,
+            id: iceCreamBall.id,
+            size: iceCreamBall.size
         }))
     }
 

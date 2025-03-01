@@ -9,11 +9,16 @@ import { nanoid } from "nanoid"
 
 describe("Use Cases || DeleteIceCream", () => {
     test("Delete IceCream", async () => {
-        const iceCreamRepo = new R.IceCreamRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
         const customerRepo = new R.CustomerRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
+
 
         const createCustomer = new CreateCustomer({ customerRepo })
         const { customer } = await createCustomer.execute({
@@ -56,7 +61,7 @@ describe("Use Cases || DeleteIceCream", () => {
 
         expect(iceCreamRepo.iceCreams).toHaveLength(2)
         expect(iceCreamRepo.iceCreams.find(
-            ({id}) => id === created.iceCream.id
+            ({ id }) => id === created.iceCream.id
         )).toEqual(created.iceCreamDBRow)
 
         try {
@@ -69,12 +74,19 @@ describe("Use Cases || DeleteIceCream", () => {
 
         expect(iceCreamRepo.iceCreams).toHaveLength(1)
         expect(iceCreamRepo.iceCreams.find(
-            ({id}) => id === created.iceCream.id
+            ({ id }) => id === created.iceCream.id
         )).toEqual(undefined)
     })
 
     test("Delete Inexistent IceCream", async () => {
-        const iceCreamRepo = new R.IceCreamRepoInMemory()
+        const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
+        const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
+        const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
 
         try {
             await iceCreamRepo.delete({

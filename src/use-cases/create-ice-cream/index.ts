@@ -20,7 +20,8 @@ export class CreateIceCream implements T.CreateIceCreamUseCase {
         const newIceCream = new IceCream({
             balls: iceCream.balls,
             base: iceCream.base,
-            name: iceCream.name
+            name: iceCream.name,
+            id: iceCream.id ?? undefined
         })
 
         await this.validate(newIceCream, customerId)

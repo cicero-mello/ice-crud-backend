@@ -13,9 +13,26 @@ export interface CreateIceCreamBallParams {
     iceCreamId: string
 }
 
+export interface UpdateIceCreamBallParams {
+    iceCreamBall: IceCreamBall
+    iceCreamId: string
+}
+
+export interface IceCreamBallResponse {
+    iceCreamBall: IceCreamBall
+    iceCreamBallDBRow: IceCreamBallDBRow
+}
+
 export interface IceCreamBallRepo {
     iceCreamBalls: IceCreamBallDBRow[]
-    create(params: CreateIceCreamBallParams): Promise<IceCreamBallDBRow>
+    create(
+        params: CreateIceCreamBallParams
+    ): Promise<IceCreamBallDBRow>
+    update(
+        params: UpdateIceCreamBallParams
+    ): Promise<IceCreamBallResponse>
     alreadyExists(iceCreamBallId: string): Promise<boolean>
-    getByIceCream(iceCreamId: string): Promise<IceCreamBallDBRow[]>
+    getByIceCream(
+        iceCreamId: string
+    ): Promise<IceCreamBallResponse[]>
 }
