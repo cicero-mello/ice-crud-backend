@@ -22,6 +22,18 @@ export class IceCreamCupRepoInMemory implements IceCreamCupRepo {
         }
     }
 
+    async getByIceCream(iceCreamId: string) {
+        const cup = this.iceCreamCups.find((cup) => (
+            cup.iceCreamId === iceCreamId
+        ))
+
+        if(!cup){
+            throw new Error("This Ice Cream Doesn't Have Cup!")
+        }
+
+        return cup
+    }
+
     async alreadyExists(iceCreamCupId: string) {
         return this.iceCreamCups.some(
             ({ id }) => id === iceCreamCupId

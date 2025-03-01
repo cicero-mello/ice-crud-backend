@@ -22,6 +22,14 @@ export class IceCreamBallRepoInMemory implements IceCreamBallRepo {
         }
     }
 
+    async getByIceCream(iceCreamId: string) {
+        const balls = this.iceCreamBalls.filter(
+            (ball) => ball.iceCreamId === iceCreamId
+        )
+
+        return balls
+    }
+
     async alreadyExists(iceCreamBallId: string) {
         return this.iceCreamBalls.some(
             ({ id }) => id === iceCreamBallId

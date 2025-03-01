@@ -23,4 +23,5 @@ export interface IceCreamRepo {
     alreadyExists(iceCreamId: string): Promise<boolean>
     create(params: CreateIceCreamRepoParams): Promise<IceCreamDBRow>
     delete(params: DeleteIceCreamRepoParams): Promise<void>
+    getByCustomer(customerId: string): Promise<IceCreamDBRow[]>
 }

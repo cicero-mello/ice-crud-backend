@@ -17,4 +17,5 @@ export interface IceCreamBallRepo {
     iceCreamBalls: IceCreamBallDBRow[]
     create(params: CreateIceCreamBallParams): Promise<IceCreamBallDBRow>
     alreadyExists(iceCreamBallId: string): Promise<boolean>
+    getByIceCream(iceCreamId: string): Promise<IceCreamBallDBRow[]>
 }

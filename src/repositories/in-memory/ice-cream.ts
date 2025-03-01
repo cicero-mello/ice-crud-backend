@@ -34,6 +34,14 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         this.iceCreams.splice(index, 1)
     }
 
+    async getByCustomer(customerId: string) {
+        const iceCreams = this.iceCreams.filter((iceCream) => (
+            iceCream.customerId === customerId
+        ))
+
+        return iceCreams
+    }
+
     async alreadyExists(iceCreamId: string) {
         return this.iceCreams.some(
             ({ id }) => id === iceCreamId

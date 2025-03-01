@@ -1,6 +1,12 @@
-import { IceCreamBall } from "#entities/ice-cream-ball"
-import { IceCreamCone } from "#entities/ice-cream-cone"
-import { IceCreamCup } from "#entities/ice-cream-cup"
+import {
+    IceCreamBall,
+    IceCreamBallProps,
+    IceCreamCone,
+    IceCreamConeProps,
+    IceCreamCup,
+    IceCreamCupProps
+} from "#entities"
+
 
 export interface IceCreamProps {
     id: string
@@ -17,3 +23,9 @@ export interface IceCreamConstructor {
     id?: string
 }
 
+export interface IceCreamData {
+    id: string
+    name: string
+    balls: IceCreamBallProps[]
+    base: IceCreamConeProps | IceCreamCupProps
+}
