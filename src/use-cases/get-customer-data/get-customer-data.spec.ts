@@ -5,11 +5,13 @@ import { CustomerData } from "#repositories"
 import { getError } from "#utils"
 import { Avatar } from "#enums"
 import { nanoid } from "nanoid"
+import { GetCustomerData } from "."
 
 describe("Use Cases || GetCustomerData", () => {
     test("Get Data With Valid Customer Id", async () => {
         const customerRepo = new CustomerRepoInMemory()
         const createCustomer = new CreateCustomer({ customerRepo })
+        const getCostumerData = new GetCustomerData({ customerRepo })
 
         const { customer } = await createCustomer.execute({
             avatar: Avatar.OldBusinessWoman,
@@ -19,7 +21,7 @@ describe("Use Cases || GetCustomerData", () => {
 
         let customerData
         try {
-            customerData = await customerRepo.getById({
+            customerData = await getCostumerData.execute({
                 customerId: customer.id
             })
         } catch (error) {
@@ -35,6 +37,7 @@ describe("Use Cases || GetCustomerData", () => {
     test("Get Data With Invalid Customer Id", async () => {
         const customerRepo = new CustomerRepoInMemory()
         const createCustomer = new CreateCustomer({ customerRepo })
+        const getCostumerData = new GetCustomerData({ customerRepo })
 
         const { customer } = await createCustomer.execute({
             avatar: Avatar.OldBusinessWoman,
@@ -50,7 +53,7 @@ describe("Use Cases || GetCustomerData", () => {
 
         invalidIds.forEach(async (invalidId: any) => {
             try {
-                await customerRepo.getById({
+                await getCostumerData.execute({
                     customerId: invalidId
                 })
             } catch (error) {
