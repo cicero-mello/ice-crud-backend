@@ -1,4 +1,4 @@
-import { IceCreamBallRepo, IceCreamRepo } from "#repositories"
+import { IceCreamBallRepo } from "#repositories"
 import { zodValidate } from "#utils"
 import * as T from "./types"
 
