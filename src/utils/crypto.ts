@@ -1,12 +1,14 @@
 import crypto from 'crypto'
+import * as dotenv from "dotenv"
+
+dotenv.config()
 
 export const generateSalt = (bytes: number = 8) => {
     return crypto.randomBytes(bytes).toString('hex')
 }
 
 export const generateHash = (content: string, salt: string) => {
-    //TODO - Increase Iterations Later
-    const iterations = 10
+    const iterations = Number(process.env.GENERATE_HASH_ITERATIONS) ?? 10
     const keyLength = 32
     const digestAlgorithm = "sha512"
 
