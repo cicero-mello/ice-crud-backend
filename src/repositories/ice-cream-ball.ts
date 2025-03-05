@@ -1,5 +1,5 @@
-import { BallFlavor, IceCreamBall } from "#entities"
-import { Size } from "#enums"
+import { IceCreamBall } from "#entities"
+import { Size, BallFlavor } from "#enums"
 
 export interface IceCreamBallDBRow {
     id: string

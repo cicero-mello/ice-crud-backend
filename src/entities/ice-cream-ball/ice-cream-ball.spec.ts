@@ -1,8 +1,7 @@
 import { getError, getMinAndMaxNumberFromEnum, getZodError } from "#utils"
 import { describe, expect, test } from "vitest"
-import { BallFlavor } from "./types"
 import { IceCreamBall } from "."
-import { Size } from "#enums"
+import { BallFlavor, Size } from "#enums"
 import { ZodError } from "zod"
 import { nanoid } from "nanoid"
 

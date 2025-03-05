@@ -1,8 +1,8 @@
-import { BallFlavor, IceCream, IceCreamBall, IceCreamCup } from "#entities"
+import { IceCream, IceCreamBall, IceCreamCup } from "#entities"
 import * as R from "#repositories/in-memory"
 import { describe, expect, test } from "vitest"
 import { CreateIceCream } from "."
-import { Avatar, IceCreamBaseType, Size } from "#enums"
+import { Avatar, IceCreamBaseType, Size, BallFlavor } from "#enums"
 import { CreateCustomer } from "#use-cases"
 import { getError } from "#utils"
 

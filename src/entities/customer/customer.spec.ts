@@ -1,13 +1,12 @@
 import { getError, getMinAndMaxNumberFromEnum, getZodError } from "#utils"
 import { generateHash, generateSalt } from "#utils/crypto"
 import { expect, test, describe } from "vitest"
-import { Avatar, Size } from "#enums"
+import { Avatar, Size, BallFlavor } from "#enums"
 import { ZodError } from "zod"
 import { Customer } from "."
 import {
     IceCream,
     IceCreamBall,
-    BallFlavor,
     IceCreamCone,
     IceCreamCup
 } from "#entities"

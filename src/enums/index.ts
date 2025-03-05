@@ -9,6 +9,11 @@ export enum IceCreamBaseType {
     Cup
 }
 
+export enum BallFlavor {
+    chocolate,
+    vanilla
+}
+
 export enum Avatar {
     AfroBusinessMan,
     AfroBusinessWoman,

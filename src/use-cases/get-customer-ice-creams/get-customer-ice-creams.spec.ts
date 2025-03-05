@@ -1,4 +1,4 @@
-import { Avatar, Size } from "#enums"
+import { Avatar, Size, BallFlavor } from "#enums"
 import * as R from "#repositories/in-memory"
 import { CreateCustomer, CreateIceCream } from "#use-cases"
 import { describe, expect, expectTypeOf, test } from "vitest"
@@ -6,7 +6,6 @@ import { GetCustomerIceCreams } from "."
 import { getError } from "#utils"
 import { nanoid } from "nanoid"
 import {
-    BallFlavor,
     IceCreamBall,
     IceCreamCone,
     IceCreamCup,

@@ -12,7 +12,127 @@ model Customer {
     name   String
     hash   String @unique
     salt   String
-    avatar Int
+    avatar Avatar
+
+    IceCreams IceCream[]
 
     @@map("customers")
+}
+
+model IceCream {
+    id         String           @id
+    name       String
+    baseType   IceCreamBaseType
+    customerId String
+
+    Customer     Customer       @relation(fields: [customerId], references: [id])
+    Balls        IceCreamBall[]
+    IceCreamCone IceCreamCone[]
+    IceCreamCup  IceCreamCup[]
+
+    @@map("ice_creams")
+}
+
+model IceCreamBall {
+    id         String     @id
+    flavor     BallFlavor
+    size       Size
+    iceCreamId String
+
+    IceCream IceCream @relation(fields: [iceCreamId], references: [id])
+
+    @@map("ice_cream_balls")
+}
+
+model IceCreamCone {
+    id         String @id
+    color      String
+    size       Size
+    iceCreamId String
+
+    IceCream IceCream @relation(fields: [iceCreamId], references: [id])
+
+    @@map("ice_cream_cones")
+}
+
+model IceCreamCup {
+    id         String @id
+    size       Size
+    iceCreamId String
+
+    IceCream IceCream @relation(fields: [iceCreamId], references: [id])
+
+    @@map("ice_cream_cups")
+}
+
+// -- ENUMS divisor | don't delete this line --
+enum Size {
+    small
+    medium
+    big
+}
+
+enum IceCreamBaseType {
+    Cone
+    Cup
+}
+
+enum BallFlavor {
+    chocolate
+    vanilla
+}
+
+enum Avatar {
+    AfroBusinessMan
+    AfroBusinessWoman
+    AfroFemaleFarmer
+    AfroFemaleGraduatedStudent
+    AfroFemaleScientist
+    AfroMaleFarmer
+    AfroMaleGraduatedStudent
+    AfroMaleScientist
+    AfroMan
+    AfroOldBusinessMan
+    AfroOldBusinessWoman
+    AfroOldFemaleFarmer
+    AfroOldMaleFarmer
+    AfroOldMan
+    AfroOldSportMan
+    AfroOldSportWoman
+    AfroSportMan
+    AfroSportWoman
+    AfroWoman
+    AfroYoungMan
+    AfroYoungWoman
+    AsianOldMan
+    AsianOldWoman
+    AsianYoungWoman
+    BusinessMan
+    BusinessWoman
+    Clown
+    Criminal
+    FemaleFarmer
+    FemaleGraduatedStudent
+    FemaleScientist
+    FireFighter
+    Hoodie
+    IndianWoman
+    MaleArtist
+    MaleFarmer
+    MaleMuslim
+    MaleScientist
+    MuslimMan
+    OldBusinessMan
+    OldBusinessWoman
+    OldFemaleFarmer
+    OldMaleFarmer
+    OldMan
+    OldSportMan
+    OldSportWoman
+    OldWoman
+    PartyMan
+    PartyWoman
+    SportMan
+    SportWoman
+    YoungMan
 }

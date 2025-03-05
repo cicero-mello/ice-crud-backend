@@ -1,4 +1,4 @@
-import { Size } from "#enums"
+import { Size, BallFlavor } from "#enums"
 import { describe, expect, test } from "vitest"
 import { IceCream } from "."
 import { getError, getZodError } from "#utils"
@@ -6,7 +6,6 @@ import { nanoid } from "nanoid"
 import { ZodError } from "zod"
 import {
     IceCreamBall,
-    BallFlavor,
     IceCreamCone,
     IceCreamCup
 } from "#entities"

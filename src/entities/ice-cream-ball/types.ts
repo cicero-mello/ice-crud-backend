@@ -1,4 +1,4 @@
-import { Size } from "#enums"
+import { BallFlavor, Size } from "#enums"
 
 export interface IceCreamBallProps {
     id: string
@@ -11,9 +11,4 @@ export interface IceCreamBallConstructor {
     size: Size
 
     id?: string
-}
-
-export enum BallFlavor {
-    chocolate = 0,
-    vanilla = 1
 }
