@@ -3,7 +3,8 @@ import { prisma } from "#libs/prisma"
 import {
     CreateIceCreamCupParams,
     IceCreamCupResponse,
-    IceCreamCupRepo
+    IceCreamCupRepo,
+    IceCreamCupDBRow
 } from "#repositories"
 
 export class IceCreamCupRepoSQL implements IceCreamCupRepo {
@@ -11,7 +12,7 @@ export class IceCreamCupRepoSQL implements IceCreamCupRepo {
     async create({
         iceCreamCup,
         iceCreamId
-    }: CreateIceCreamCupParams) {
+    }: CreateIceCreamCupParams): Promise<IceCreamCupDBRow> {
         const { id, size } = iceCreamCup
 
         await prisma.iceCreamCup.create({
@@ -60,7 +61,7 @@ export class IceCreamCupRepoSQL implements IceCreamCupRepo {
         }
     }
 
-    async deleteByIceCream(iceCreamId: string){
+    async deleteByIceCream(iceCreamId: string): Promise<void>{
         await prisma.iceCreamCup.delete({
             where: { iceCreamId: iceCreamId }
         })
@@ -73,7 +74,7 @@ export class IceCreamCupRepoSQL implements IceCreamCupRepo {
         return !!cup
     }
 
-    async alreadyExists(iceCreamCupId: string) {
+    async alreadyExists(iceCreamCupId: string): Promise<boolean> {
         const cup = await prisma.iceCreamCup.findUnique({
             where: { id: iceCreamCupId }
         })

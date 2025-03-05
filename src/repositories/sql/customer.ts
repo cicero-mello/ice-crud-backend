@@ -2,13 +2,16 @@ import { prisma } from "#libs/prisma"
 import {
     CreateCustomerRepoParams,
     CustomerData,
+    CustomerDBRow,
     CustomerRepo,
     GetByIdCustomerRepoParams
 } from "#repositories"
 
 export class CustomerRepoSQL implements CustomerRepo {
 
-    async create({ customer }: CreateCustomerRepoParams) {
+    async create({
+        customer
+    }: CreateCustomerRepoParams): Promise<CustomerDBRow> {
         const { name, id, hash, salt, avatar } = customer
 
         await prisma.customer.create({
@@ -38,7 +41,9 @@ export class CustomerRepoSQL implements CustomerRepo {
         }
     }
 
-    async usernameIsAvailable(username: string) {
+    async usernameIsAvailable(
+        username: string
+    ): Promise<boolean> {
         const targetCustomer = await prisma.customer.findUnique({
             where: { name: username }
         })
@@ -46,7 +51,9 @@ export class CustomerRepoSQL implements CustomerRepo {
         return !targetCustomer
     }
 
-    async alreadyExists(customerId: string) {
+    async alreadyExists(
+        customerId: string
+    ): Promise<boolean> {
         const targetCustomer = await prisma.customer.findUnique({
             where: { id: customerId }
         })

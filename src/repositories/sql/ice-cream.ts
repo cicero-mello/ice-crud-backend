@@ -22,7 +22,7 @@ export class IceCreamRepoSQL implements IceCreamRepo {
 
     async create({
         iceCream, baseType, customerId
-    }: CreateIceCreamRepoParams) {
+    }: CreateIceCreamRepoParams): Promise<IceCreamDBRow> {
         const { id, name } = iceCream
 
         await prisma.iceCream.create({
@@ -34,7 +34,7 @@ export class IceCreamRepoSQL implements IceCreamRepo {
         }
     }
 
-    async update(iceCream: IceCream) {
+    async update(iceCream: IceCream): Promise<void> {
         const { base, baseType } = await this.getBase(iceCream)
         if (base instanceof IceCreamCone) {
             await this.iceCreamConeRepo.update({
@@ -67,7 +67,7 @@ export class IceCreamRepoSQL implements IceCreamRepo {
 
     async delete({
         iceCreamId
-    }: DeleteIceCreamRepoParams) {
+    }: DeleteIceCreamRepoParams): Promise<void> {
         await prisma.iceCream.delete({
             where: { id: iceCreamId }
         })
@@ -134,7 +134,7 @@ export class IceCreamRepoSQL implements IceCreamRepo {
         return { base, baseType }
     }
 
-    async alreadyExists(iceCreamId: string) {
+    async alreadyExists(iceCreamId: string): Promise<boolean> {
         const iceCream = await prisma.iceCream.findUnique({
             where: { id: iceCreamId }
         })

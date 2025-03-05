@@ -9,7 +9,9 @@ import {
 export class CustomerRepoInMemory implements CustomerRepo {
     public customers: CustomerDBRow[] = []
 
-    async create({ customer }: CreateCustomerRepoParams) {
+    async create({
+        customer
+    }: CreateCustomerRepoParams): Promise<CustomerDBRow> {
         const { name, id, hash, salt, avatar } = customer
 
         this.customers.push({
@@ -39,13 +41,17 @@ export class CustomerRepoInMemory implements CustomerRepo {
         }
     }
 
-    async usernameIsAvailable(username: string) {
+    async usernameIsAvailable(
+        username: string
+    ): Promise<boolean> {
         return !this.customers.find((customer) => (
             customer.name.toLowerCase() === username.toLowerCase()
         ))
     }
 
-    async alreadyExists(customerId: string) {
+    async alreadyExists(
+        customerId: string
+    ): Promise<boolean> {
         return this.customers.some(
             ({ id }) => id === customerId
         )

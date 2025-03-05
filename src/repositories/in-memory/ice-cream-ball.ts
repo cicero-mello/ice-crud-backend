@@ -13,7 +13,7 @@ export class IceCreamBallRepoInMemory implements IceCreamBallRepo {
     async create({
         iceCreamBall,
         iceCreamId
-    }: CreateIceCreamBallParams) {
+    }: CreateIceCreamBallParams): Promise<IceCreamBallDBRow> {
         const { flavor, id, size } = iceCreamBall
 
         this.iceCreamBalls.push({
@@ -25,9 +25,9 @@ export class IceCreamBallRepoInMemory implements IceCreamBallRepo {
         }
     }
 
-    async delete(iceCreamId: string): Promise<void> {
+    async delete(iceCreamBallId: string): Promise<void> {
         const index = this.iceCreamBalls.findIndex(
-            ({ id }) => id === iceCreamId
+            ({ id }) => id === iceCreamBallId
         )
         if (index === -1) {
             throw new Error("This id does not match an existing Ice Cream Ball!")
@@ -74,7 +74,9 @@ export class IceCreamBallRepoInMemory implements IceCreamBallRepo {
         }))
     }
 
-    async alreadyExists(iceCreamBallId: string) {
+    async alreadyExists(
+        iceCreamBallId: string
+    ): Promise<boolean> {
         return this.iceCreamBalls.some(
             ({ id }) => id === iceCreamBallId
         )

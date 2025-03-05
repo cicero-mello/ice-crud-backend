@@ -2,6 +2,7 @@ import { prisma } from "#libs/prisma"
 import { IceCreamBall } from "#entities"
 import {
     CreateIceCreamBallParams,
+    IceCreamBallDBRow,
     IceCreamBallRepo,
     IceCreamBallResponse,
     UpdateIceCreamBallParams,
@@ -12,7 +13,7 @@ export class IceCreamBallRepoSQL implements IceCreamBallRepo {
     async create({
         iceCreamBall,
         iceCreamId
-    }: CreateIceCreamBallParams) {
+    }: CreateIceCreamBallParams): Promise<IceCreamBallDBRow> {
         const { flavor, id, size } = iceCreamBall
 
         await prisma.iceCreamBall.create({
@@ -66,7 +67,9 @@ export class IceCreamBallRepoSQL implements IceCreamBallRepo {
         }))
     }
 
-    async alreadyExists(iceCreamBallId: string) {
+    async alreadyExists(
+        iceCreamBallId: string
+    ): Promise<boolean> {
         const ball = await prisma.iceCreamBall.findUnique({
             where: { id: iceCreamBallId }
         })

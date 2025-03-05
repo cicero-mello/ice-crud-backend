@@ -12,7 +12,7 @@ export class IceCreamCupRepoInMemory implements IceCreamCupRepo {
     async create({
         iceCreamCup,
         iceCreamId
-    }: CreateIceCreamCupParams) {
+    }: CreateIceCreamCupParams): Promise<IceCreamCupDBRow> {
         const { id, size } = iceCreamCup
 
         this.iceCreamCups.push({
@@ -63,7 +63,7 @@ export class IceCreamCupRepoInMemory implements IceCreamCupRepo {
         }
     }
 
-    async deleteByIceCream(iceCreamId: string){
+    async deleteByIceCream(iceCreamId: string): Promise<void>{
         this.iceCreamCups = this.iceCreamCups.filter(cup => (
             cup.iceCreamId != iceCreamId
         ))
@@ -75,7 +75,7 @@ export class IceCreamCupRepoInMemory implements IceCreamCupRepo {
         )
     }
 
-    async alreadyExists(iceCreamCupId: string) {
+    async alreadyExists(iceCreamCupId: string): Promise<boolean> {
         return this.iceCreamCups.some(
             ({ id }) => id === iceCreamCupId
         )

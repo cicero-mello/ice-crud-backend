@@ -12,7 +12,7 @@ export class IceCreamConeRepoInMemory implements IceCreamConeRepo {
     async create({
         iceCreamCone,
         iceCreamId
-    }: CreateIceCreamConeParams) {
+    }: CreateIceCreamConeParams): Promise<IceCreamConeDBRow> {
         const { id, color, size } = iceCreamCone
 
         this.iceCreamCones.push({
@@ -64,7 +64,7 @@ export class IceCreamConeRepoInMemory implements IceCreamConeRepo {
         }
     }
 
-    async deleteByIceCream(iceCreamId: string){
+    async deleteByIceCream(iceCreamId: string): Promise<void>{
         this.iceCreamCones = this.iceCreamCones.filter(cone => (
             cone.iceCreamId != iceCreamId
         ))
@@ -76,7 +76,7 @@ export class IceCreamConeRepoInMemory implements IceCreamConeRepo {
         ))
     }
 
-    async alreadyExists(iceCreamConeId: string) {
+    async alreadyExists(iceCreamConeId: string): Promise<boolean> {
         return this.iceCreamCones.some(
             ({ id }) => id === iceCreamConeId
         )

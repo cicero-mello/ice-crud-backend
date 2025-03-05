@@ -21,7 +21,7 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
 
     async create({
         iceCream, baseType, customerId
-    }: CreateIceCreamRepoParams) {
+    }: CreateIceCreamRepoParams): Promise<IceCreamDBRow> {
         const { id, name } = iceCream
 
         this.iceCreams.push({
@@ -33,7 +33,7 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         }
     }
 
-    async update(iceCream: IceCream){
+    async update(iceCream: IceCream): Promise<void>{
         const { base, baseType } = await this.getBase(iceCream)
         if(base instanceof IceCreamCone){
             await this.iceCreamConeRepo.update({
@@ -70,7 +70,7 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
 
     async delete({
         iceCreamId
-    }: DeleteIceCreamRepoParams) {
+    }: DeleteIceCreamRepoParams): Promise<void> {
         const index = this.iceCreams.findIndex(
             ({ id }) => id === iceCreamId
         )
@@ -80,7 +80,7 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         this.iceCreams.splice(index, 1)
     }
 
-    async getByCustomer(customerId: string) {
+    async getByCustomer(customerId: string): Promise<IceCreamDBRow[]> {
         const iceCreams = this.iceCreams.filter((iceCream) => (
             iceCream.customerId === customerId
         ))
@@ -140,7 +140,7 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         return { base, baseType }
     }
 
-    async alreadyExists(iceCreamId: string) {
+    async alreadyExists(iceCreamId: string): Promise<boolean> {
         return this.iceCreams.some(
             ({ id }) => id === iceCreamId
         )
