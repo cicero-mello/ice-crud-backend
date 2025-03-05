@@ -24,7 +24,6 @@ export interface IceCreamBallResponse {
 }
 
 export interface IceCreamBallRepo {
-    iceCreamBalls: IceCreamBallDBRow[]
     create(
         params: CreateIceCreamBallParams
     ): Promise<IceCreamBallDBRow>

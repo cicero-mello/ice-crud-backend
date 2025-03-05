@@ -23,7 +23,6 @@ export interface IceCreamCupResponse {
 }
 
 export interface IceCreamCupRepo {
-    iceCreamCups: IceCreamCupDBRow[]
     create(
         params: CreateIceCreamCupParams
     ): Promise<IceCreamCupDBRow>

@@ -32,7 +32,6 @@ export interface GetBaseIceCreamRepoResponse {
 }
 
 export interface IceCreamRepo {
-    iceCreams: IceCreamDBRow[]
     iceCreamCupRepo: IceCreamCupRepo
     iceCreamConeRepo: IceCreamConeRepo
     iceCreamBallRepo: IceCreamBallRepo

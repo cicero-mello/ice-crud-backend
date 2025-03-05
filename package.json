@@ -5,7 +5,6 @@
     "scripts": {
         "test": "vitest",
         "migrate": "npx prisma migrate dev",
-        "update-prisma-enums": "npx tsc ./scripts/update-prisma-enums.ts --module ESNext --target ESNext --moduleResolution node --outDir ./scripts/dist/ && node ./scripts/dist/update-prisma-enums.js",
         "see-db": "npx prisma studio"
     },
     "imports": {

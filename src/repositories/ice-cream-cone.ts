@@ -24,7 +24,6 @@ export interface IceCreamConeResponse {
 }
 
 export interface IceCreamConeRepo {
-    iceCreamCones: IceCreamConeDBRow[]
     create(
         params: CreateIceCreamConeParams
     ): Promise<IceCreamConeDBRow>
