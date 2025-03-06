@@ -1,5 +1,5 @@
 import Fastify from "fastify"
-import { createRoutes } from "#routes"
+import { registerRoutes } from "#routes"
 import { setupSwagger } from "#libs/swagger"
 
 const fastify = Fastify()
@@ -8,7 +8,7 @@ const start = async () => {
     try {
         console.log("⏳ Loading...")
         await setupSwagger(fastify)
-        createRoutes(fastify)
+        registerRoutes(fastify)
         await fastify.listen({ port: 3000 })
 
         console.clear()
