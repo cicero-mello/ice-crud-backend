@@ -72,7 +72,6 @@ describe("Use Cases || CreateIceCream", () => {
             pass: "veryNicePassword"
         })
 
-        let created
         try {
             const createIceCream = new CreateIceCream({
                 iceCreamBallRepo,
@@ -82,7 +81,7 @@ describe("Use Cases || CreateIceCream", () => {
                 customerRepo
             })
 
-            created = await createIceCream.execute({
+            await createIceCream.execute({
                 customerId: customer.id + "invalid",
                 iceCream: new IceCream({
                     name: "My ice cream",

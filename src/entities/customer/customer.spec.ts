@@ -90,7 +90,7 @@ describe("Customer", () => {
 
         names.forEach((name: any) => {
             try {
-                const customer = new Customer({
+                new Customer({
                     avatar, name, pass
                 })
             } catch (error) {

@@ -126,11 +126,10 @@ describe("IceCream", () => {
             "",
             "<script>alert('hack');</script>"
         ]
-        let iceCream
 
         invalidNames.forEach((name: any) => {
             try {
-                iceCream = new IceCream({
+                new IceCream({
                     name, balls, base
                 })
             } catch (error) {
@@ -186,11 +185,10 @@ describe("IceCream", () => {
             0,
             1
         ]
-        let iceCream
 
         invalidBases.forEach((base: any) => {
             try {
-                iceCream = new IceCream({
+                new IceCream({
                     name, balls, base
                 })
             } catch (error) {
