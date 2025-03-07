@@ -21,7 +21,7 @@ export class DeleteIceCreamBall implements T.DeleteIceCreamBallUseCase {
         await this.iceCreamBallRepo.delete(iceCreamBallId)
     }
 
-    constructor(params: T.AddIceCreamBallUseCaseConstructor) {
+    constructor(params: T.DeleteIceCreamBallUseCaseConstructor) {
         this.iceCreamBallRepo = params.iceCreamBallRepo
     }
 }

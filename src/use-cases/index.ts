@@ -18,3 +18,6 @@ export * from "./rename-ice-cream/types"
 
 export * from "./add-ice-cream-ball"
 export * from "./add-ice-cream-ball/types"
+
+export * from "./delete-ice-cream-ball"
+export * from "./delete-ice-cream-ball/types"

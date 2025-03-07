@@ -13,6 +13,6 @@ export interface DeleteIceCreamBallUseCase {
     ): Promise<DeleteIceCreamBallResponse>
 }
 
-export interface AddIceCreamBallUseCaseConstructor {
+export interface DeleteIceCreamBallUseCaseConstructor {
     iceCreamBallRepo: IceCreamBallRepo
 }
