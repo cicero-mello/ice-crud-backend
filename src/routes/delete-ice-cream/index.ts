@@ -2,27 +2,27 @@ import { FastifyInstance, FastifyReply } from "fastify"
 import { FastifyRequest } from "./types"
 import { schema } from "./schema"
 import { getError } from "#utils"
-import { DeleteIceCreamBall } from "#use-cases"
-import { IceCreamBallRepo } from "#repositories"
+import { DeleteIceCream } from "#use-cases"
+import { IceCreamRepo } from "#repositories"
 
-export const deleteIceCreamBall = (
+export const deleteIceCream = (
     fastify: FastifyInstance,
-    iceCreamBallRepo: IceCreamBallRepo
+    iceCreamRepo: IceCreamRepo
 ) => {
-    const URL = "/delete-ball"
-    const deleteIceCreamBall = new DeleteIceCreamBall({
-        iceCreamBallRepo
+    const URL = "/delete-ice-cream"
+    const deleteIceCream = new DeleteIceCream({
+        iceCreamRepo
     })
 
     const deleteFunc = async (
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const { iceCreamBallId } = request.body
+        const { iceCreamId } = request.body
 
         try {
-            await deleteIceCreamBall.execute({
-                iceCreamBallId
+            await deleteIceCream.execute({
+                iceCreamId
             })
         } catch (error) {
             reply.status(500).send({ message: getError(error) })
@@ -30,7 +30,7 @@ export const deleteIceCreamBall = (
         }
 
         reply.status(200).send({
-            message: "Ball Deleted!"
+            message: "Ice Cream Deleted!"
         })
     }
 

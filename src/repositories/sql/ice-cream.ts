@@ -68,6 +68,19 @@ export class IceCreamRepoSQL implements IceCreamRepo {
     async delete({
         iceCreamId
     }: DeleteIceCreamRepoParams): Promise<void> {
+        const iceCream = await this.getById(iceCreamId)
+
+        await Promise.all(iceCream.iceCream.balls.map(async (ball) => (
+            await this.iceCreamBallRepo.delete(ball.id)
+        )))
+
+        if(iceCream.iceCreamDBRow.baseType === IceCreamBaseType.Cone){
+            await this.iceCreamConeRepo.deleteByIceCream(iceCreamId)
+        }
+        else if(iceCream.iceCreamDBRow.baseType === IceCreamBaseType.Cup){
+            await this.iceCreamCupRepo.deleteByIceCream(iceCreamId)
+        }
+
         await prisma.iceCream.delete({
             where: { id: iceCreamId }
         })
