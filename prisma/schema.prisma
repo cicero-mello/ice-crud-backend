@@ -20,7 +20,7 @@ model Customer {
 }
 
 model IceCream {
-    id         String           @id
+    id         String @id
     name       String
     baseType   Int
     customerId String
@@ -34,7 +34,7 @@ model IceCream {
 }
 
 model IceCreamBall {
-    id         String     @id
+    id         String @id
     flavor     Int
     size       Int
     iceCreamId String

@@ -23,17 +23,21 @@ export class CreateIceCream implements T.CreateIceCreamUseCase {
             name: iceCream.name,
             id: iceCream.id ?? undefined
         })
-
         await this.validate(newIceCream, customerId)
 
-        await this.createBalls(newIceCream)
-        const baseType = await this.createBase(newIceCream)
+        const baseType = (
+            iceCream.base instanceof IceCreamCup ?
+            IceCreamBaseType.Cup : IceCreamBaseType.Cone
+        )
 
         const iceCreamDBRow = await this.iceCreamRepo.create({
-            customerId,
+            customerId: customerId,
             iceCream: newIceCream,
-            baseType
+            baseType: baseType
         })
+
+        await this.createBase(newIceCream)
+        await this.createBalls(newIceCream)
 
         return {
             iceCream: newIceCream,

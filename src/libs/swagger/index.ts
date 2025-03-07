@@ -4,19 +4,24 @@ import swaggerUI from "@fastify/swagger-ui"
 
 export const setupSwagger = async (fastify: FastifyInstance) => {
     await fastify.register(swagger, {
-        openapi: {
+        swagger: {
             info: {
-                title: "Minha API",
-                description: "Documentação automática usando Swagger",
+                title: "🍨 Ice CRUD 🍨",
+                description: "Ice Cream Management API",
                 version: "1.0.0"
             },
             tags: [
-                { name: "user", description: "user endpoints"}
+                { name: "customer", description: "Customer endpoints" },
+                { name: "ice-cream", description: "Ice Cream endpoints" }
             ]
         }
     })
 
     await fastify.register(swaggerUI, {
-        routePrefix: "/docs"
+        routePrefix: "/docs",
+        uiConfig: {
+            docExpansion: "full",
+            deepLinking: false
+        }
     })
 }
