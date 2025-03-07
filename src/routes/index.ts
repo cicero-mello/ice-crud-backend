@@ -2,6 +2,7 @@ import { FastifyInstance } from "fastify"
 import * as R from "#repositories/sql"
 import { postCreateCustomer } from "./create-customer"
 import { postCreateIceCream } from "./create-ice-cream"
+import { postAddIceCreamBall } from "./add-ice-cream-ball"
 
 export const registerRoutes = (fastify: FastifyInstance) => {
     const customerRepo = new R.CustomerRepoSQL()
@@ -20,6 +21,10 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         iceCreamBallRepo,
         iceCreamConeRepo,
         iceCreamCupRepo,
+        iceCreamRepo
+    })
+    postAddIceCreamBall(fastify, {
+        iceCreamBallRepo,
         iceCreamRepo
     })
 }
