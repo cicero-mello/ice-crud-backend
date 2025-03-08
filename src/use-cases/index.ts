@@ -27,3 +27,6 @@ export * from "./update-ice-cream-ball/types"
 
 export * from "./update-ice-cream-base"
 export * from "./update-ice-cream-base/types"
+
+export * from "./customer-login"
+export * from "./customer-login/types"

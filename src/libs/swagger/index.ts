@@ -12,7 +12,8 @@ export const setupSwagger = async (fastify: FastifyInstance) => {
             },
             tags: [
                 { name: "customer", description: "Customer endpoints" },
-                { name: "ice-cream", description: "Ice Cream endpoints" }
+                { name: "ice-cream", description: "Ice Cream endpoints" },
+                { name: "auth", description: "Authentication endpoints" }
             ]
         }
     })

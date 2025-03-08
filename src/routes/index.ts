@@ -10,6 +10,7 @@ import { getCustomerIceCreams } from "./get-customer-ice-creams"
 import { patchRenameIceCream } from "./rename-ice-cream"
 import { patchUpdateIceCreamBall } from "./update-ice-cream-ball"
 import { patchUpdateIceCreamBase } from "./update-ice-cream-base"
+import { postCustomerLogin } from "./customer-login"
 
 export const registerRoutes = (fastify: FastifyInstance) => {
     const customerRepo = new R.CustomerRepoSQL()
@@ -57,4 +58,6 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         iceCreamCupRepo,
         iceCreamRepo
     })
+
+    postCustomerLogin(fastify, customerRepo)
 }
