@@ -34,7 +34,7 @@ export const schema: FastifySchema = {
                                 }
                             },
                             base: {
-                                oneOf: [
+                                anyOf: [
                                     {
                                         // Cone
                                         type: "object",

@@ -24,3 +24,6 @@ export * from "./delete-ice-cream-ball/types"
 
 export * from "./update-ice-cream-ball"
 export * from "./update-ice-cream-ball/types"
+
+export * from "./update-ice-cream-base"
+export * from "./update-ice-cream-base/types"
