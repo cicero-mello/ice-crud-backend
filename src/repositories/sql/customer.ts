@@ -59,4 +59,14 @@ export class CustomerRepoSQL implements CustomerRepo {
         })
         return !!targetCustomer
     }
+
+    async getByName(name: string): Promise<CustomerDBRow> {
+        const targetCustomer = await prisma.customer.findUnique({
+            where: { name: name }
+        })
+        if(!targetCustomer){
+            throw new Error("Customer not found!")
+        }
+        return targetCustomer
+    }
 }

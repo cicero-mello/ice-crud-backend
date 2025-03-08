@@ -56,4 +56,14 @@ export class CustomerRepoInMemory implements CustomerRepo {
             ({ id }) => id === customerId
         )
     }
+
+    async getByName(name: string): Promise<CustomerDBRow> {
+        const targetCustomer = this.customers.find(
+            (customer) => customer.name === name
+        )
+        if(!targetCustomer){
+            throw new Error("Customer not found!")
+        }
+        return targetCustomer
+    }
 }

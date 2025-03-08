@@ -26,6 +26,7 @@ export interface CustomerData {
 export interface CustomerRepo {
     create(params: CreateCustomerRepoParams): Promise<CustomerDBRow>
     getById(params: GetByIdCustomerRepoParams): Promise<CustomerData>
+    getByName(name: string): Promise<CustomerDBRow>
     alreadyExists(customerId: string): Promise<boolean>
     usernameIsAvailable(username: string): Promise<boolean>
 }
