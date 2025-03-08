@@ -7,6 +7,7 @@ import { deleteIceCreamBall } from "./delete-ice-cream-ball"
 import { deleteIceCream } from "./delete-ice-cream"
 import { getCustomerData } from "./get-customer-data"
 import { getCustomerIceCreams } from "./get-customer-ice-creams"
+import { patchRenameIceCream } from "./rename-ice-cream"
 
 export const registerRoutes = (fastify: FastifyInstance) => {
     const customerRepo = new R.CustomerRepoSQL()
@@ -43,4 +44,6 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         iceCreamCupRepo,
         iceCreamRepo
     })
+
+    patchRenameIceCream(fastify, iceCreamRepo)
 }
