@@ -14,20 +14,10 @@ export class UpdateIceCreamBase implements T.UpdateIceCreamBaseUseCase {
     }: T.UpdateIceCreamBaseRequest): Promise<T.UpdateIceCreamBaseResponse> {
         zodValidate.id.parse(iceCreamId)
 
+        await this.iceCreamConeRepo.deleteByIceCream(iceCreamId)
+        await this.iceCreamCupRepo.deleteByIceCream(iceCreamId)
+
         if(base instanceof IceCreamCone){
-            const iceCreamAlreadyHaveCone = await this.iceCreamConeRepo.iceCreamHaveCone(
-                iceCreamId
-            )
-
-            if(iceCreamAlreadyHaveCone){
-                await this.iceCreamConeRepo.update({
-                    iceCreamId,
-                    iceCreamCone: base
-                })
-                return
-            }
-
-            await this.iceCreamCupRepo.deleteByIceCream(iceCreamId)
             await this.iceCreamConeRepo.create({
                 iceCreamId,
                 iceCreamCone: base
@@ -36,18 +26,6 @@ export class UpdateIceCreamBase implements T.UpdateIceCreamBaseUseCase {
         }
 
         if(base instanceof IceCreamCup){
-            const iceCreamAlreadyHaveCup = await this.iceCreamCupRepo.iceCreamHaveCup(
-                iceCreamId
-            )
-
-            if(iceCreamAlreadyHaveCup){
-                await this.iceCreamCupRepo.update({
-                    iceCreamId,
-                    iceCreamCup: base,
-                })
-                return
-            }
-            await this.iceCreamConeRepo.deleteByIceCream(iceCreamId)
             await this.iceCreamCupRepo.create({
                 iceCreamId,
                 iceCreamCup: base,

@@ -62,7 +62,7 @@ export class IceCreamCupRepoSQL implements IceCreamCupRepo {
     }
 
     async deleteByIceCream(iceCreamId: string): Promise<void>{
-        await prisma.iceCreamCup.delete({
+        await prisma.iceCreamCup.deleteMany({
             where: { iceCreamId: iceCreamId }
         })
     }
