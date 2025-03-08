@@ -1,4 +1,4 @@
-import { Avatar, Size, BallFlavor } from "#enums"
+import { Avatar, Size, BallFlavor, IceCreamBaseType } from "#enums"
 import * as R from "#repositories/in-memory"
 import { CreateCustomer, CreateIceCream } from "#use-cases"
 import { describe, expect, expectTypeOf, test } from "vitest"
@@ -95,6 +95,7 @@ describe("Use Cases || GetCustomerIceCreams", () => {
         expect(iceCreams).toHaveLength(2)
         expect(iceCreams[0].balls[0].flavor).toEqual(BallFlavor.chocolate)
         expect(iceCreams[1].balls[0].flavor).toEqual(BallFlavor.vanilla)
+        expect(iceCreams[0].baseType).toEqual(IceCreamBaseType.Cone)
         expectTypeOf(iceCreams).toMatchTypeOf<IceCreamData[]>()
         // ---------------------------------------------------------------
 

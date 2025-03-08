@@ -6,6 +6,7 @@ import { postAddIceCreamBall } from "./add-ice-cream-ball"
 import { deleteIceCreamBall } from "./delete-ice-cream-ball"
 import { deleteIceCream } from "./delete-ice-cream"
 import { getCustomerData } from "./get-customer-data"
+import { getCustomerIceCreams } from "./get-customer-ice-creams"
 
 export const registerRoutes = (fastify: FastifyInstance) => {
     const customerRepo = new R.CustomerRepoSQL()
@@ -35,4 +36,11 @@ export const registerRoutes = (fastify: FastifyInstance) => {
     deleteIceCream(fastify, iceCreamRepo)
 
     getCustomerData(fastify, customerRepo)
+    getCustomerIceCreams(fastify, {
+        customerRepo,
+        iceCreamBallRepo,
+        iceCreamConeRepo,
+        iceCreamCupRepo,
+        iceCreamRepo
+    })
 }

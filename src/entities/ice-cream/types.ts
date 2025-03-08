@@ -6,6 +6,7 @@ import {
     IceCreamCup,
     IceCreamCupProps
 } from "#entities"
+import { IceCreamBaseType } from "#enums"
 
 
 export interface IceCreamProps {
@@ -28,4 +29,5 @@ export interface IceCreamData {
     name: string
     balls: IceCreamBallProps[]
     base: IceCreamConeProps | IceCreamCupProps
+    baseType: IceCreamBaseType
 }

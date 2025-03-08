@@ -34,6 +34,7 @@ export class GetCustomerIceCreams implements T.GetCustomerIceCreamsUseCase {
                     name: iceCream.name,
                     balls: balls,
                     base: base,
+                    baseType: iceCream.baseType
                 }
 
                 return iceCreamData
