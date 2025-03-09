@@ -9,15 +9,15 @@ import { nanoid } from "nanoid"
 
 describe("Use Cases || AddIceCreamBall", () => {
     test("Adding With Valid/Invalid IceCreamId", async () => {
- const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
+        const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
-        const customerRepo = new R.CustomerRepoInMemory()
         const iceCreamRepo = new R.IceCreamRepoInMemory({
             iceCreamBallRepo,
             iceCreamConeRepo,
             iceCreamCupRepo
         })
+        const customerRepo = new R.CustomerRepoInMemory({ iceCreamRepo })
 
         const createCustomer = new CreateCustomer({ customerRepo })
         const { customer } = await createCustomer.execute({

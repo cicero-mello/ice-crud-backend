@@ -12,12 +12,12 @@ describe("Use Cases || DeleteIceCream", () => {
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
-        const customerRepo = new R.CustomerRepoInMemory()
         const iceCreamRepo = new R.IceCreamRepoInMemory({
             iceCreamBallRepo,
             iceCreamConeRepo,
             iceCreamCupRepo
         })
+        const customerRepo = new R.CustomerRepoInMemory({ iceCreamRepo })
 
 
         const createCustomer = new CreateCustomer({ customerRepo })

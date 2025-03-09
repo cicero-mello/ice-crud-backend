@@ -3,10 +3,14 @@ import {
     CustomerData,
     CustomerDBRow,
     CustomerRepo,
-    GetByIdCustomerRepoParams
+    CustomerRepoConstructor,
+    DeleteCustomerRepoParams,
+    GetByIdCustomerRepoParams,
+    IceCreamRepo
 } from "#repositories"
 
 export class CustomerRepoInMemory implements CustomerRepo {
+    public iceCreamRepo: IceCreamRepo
     public customers: CustomerDBRow[] = []
 
     async create({
@@ -30,7 +34,7 @@ export class CustomerRepoInMemory implements CustomerRepo {
             ({ id }) => id === customerId
         )
 
-        if(!targetCustomer){
+        if (!targetCustomer) {
             throw new Error("Customer not found!")
         }
 
@@ -61,9 +65,25 @@ export class CustomerRepoInMemory implements CustomerRepo {
         const targetCustomer = this.customers.find(
             (customer) => customer.name === name
         )
-        if(!targetCustomer){
+        if (!targetCustomer) {
             throw new Error("Customer not found!")
         }
         return targetCustomer
+    }
+
+    async delete({
+        customerId
+    }: DeleteCustomerRepoParams): Promise<void> {
+        const index = this.customers.findIndex(
+            ({ id }) => id === customerId
+        )
+        if (index === -1) {
+            throw new Error("This id does not match an existing Customer!")
+        }
+        this.customers.splice(index, 1)
+    }
+
+    constructor(params: CustomerRepoConstructor){
+        this.iceCreamRepo = params.iceCreamRepo
     }
 }

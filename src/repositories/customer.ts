@@ -1,5 +1,6 @@
 import { Customer } from "#entities"
 import { Avatar } from "#enums"
+import { IceCreamRepo } from "./ice-cream"
 
 export interface CustomerDBRow {
     id: string
@@ -23,10 +24,20 @@ export interface CustomerData {
     avatar: Avatar
 }
 
+export interface DeleteCustomerRepoParams {
+    customerId: string
+}
+
 export interface CustomerRepo {
+    iceCreamRepo: IceCreamRepo
     create(params: CreateCustomerRepoParams): Promise<CustomerDBRow>
     getById(params: GetByIdCustomerRepoParams): Promise<CustomerData>
     getByName(name: string): Promise<CustomerDBRow>
     alreadyExists(customerId: string): Promise<boolean>
     usernameIsAvailable(username: string): Promise<boolean>
+    delete(params: DeleteCustomerRepoParams): Promise<void>
+}
+
+export interface CustomerRepoConstructor {
+    iceCreamRepo: IceCreamRepo
 }

@@ -1,13 +1,18 @@
 import { prisma } from "#libs/prisma"
+import { zodValidate } from "#utils"
 import {
     CreateCustomerRepoParams,
     CustomerData,
     CustomerDBRow,
     CustomerRepo,
-    GetByIdCustomerRepoParams
+    CustomerRepoConstructor,
+    DeleteCustomerRepoParams,
+    GetByIdCustomerRepoParams,
+    IceCreamRepo
 } from "#repositories"
 
 export class CustomerRepoSQL implements CustomerRepo {
+    public iceCreamRepo: IceCreamRepo
 
     async create({
         customer
@@ -30,7 +35,7 @@ export class CustomerRepoSQL implements CustomerRepo {
             where: { id: customerId }
         })
 
-        if(!targetCustomer){
+        if (!targetCustomer) {
             throw new Error("Customer not found!")
         }
 
@@ -64,9 +69,34 @@ export class CustomerRepoSQL implements CustomerRepo {
         const targetCustomer = await prisma.customer.findUnique({
             where: { name: name }
         })
-        if(!targetCustomer){
+        if (!targetCustomer) {
             throw new Error("Customer not found!")
         }
         return targetCustomer
+    }
+
+    async delete({
+        customerId
+    }: DeleteCustomerRepoParams): Promise<void> {
+        zodValidate.id.parse(customerId)
+        await this.getById({ customerId })
+
+        const customerIceCreams = await this.iceCreamRepo.getByCustomer(
+            customerId
+        )
+
+        await Promise.all(customerIceCreams.map(async (iceCream) =>
+            await this.iceCreamRepo.delete({
+                iceCreamId: iceCream.id
+            })
+        ))
+
+        await prisma.customer.delete({
+            where: { id: customerId }
+        })
+    }
+
+    constructor(params: CustomerRepoConstructor){
+        this.iceCreamRepo = params.iceCreamRepo
     }
 }

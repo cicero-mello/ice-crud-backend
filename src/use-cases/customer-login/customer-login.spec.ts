@@ -1,4 +1,4 @@
-import { CustomerRepoInMemory } from "#repositories/in-memory"
+import * as R from "#repositories/in-memory"
 import { CreateCustomer } from "#use-cases"
 import { describe, expect, test } from "vitest"
 import { CustomerLogin } from "."
@@ -7,7 +7,15 @@ import { getError } from "#utils"
 
 describe("Use Cases || CustomerLogin", () => {
     test("Get Tokens With Valid Credentials", async () => {
-        const customerRepo = new CustomerRepoInMemory()
+        const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
+        const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
+        const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
+        const customerRepo = new R.CustomerRepoInMemory({ iceCreamRepo })
         const createCustomer = new CreateCustomer({ customerRepo })
 
         const customerName = "customer username"
@@ -43,7 +51,15 @@ describe("Use Cases || CustomerLogin", () => {
         }
     })
     test("Get Error With Invalid Credentials", async () => {
-        const customerRepo = new CustomerRepoInMemory()
+        const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
+        const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
+        const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
+        const customerRepo = new R.CustomerRepoInMemory({ iceCreamRepo })
         const createCustomer = new CreateCustomer({ customerRepo })
 
         const customerName = "customer username"

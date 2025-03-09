@@ -14,7 +14,6 @@ import {
 
 describe("Use Cases || GetCustomerIceCreams", () => {
     test("Get With Valid/Invalid Customer Id", async () => {
-        const customerRepo = new R.CustomerRepoInMemory()
         const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
         const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
         const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
@@ -23,6 +22,7 @@ describe("Use Cases || GetCustomerIceCreams", () => {
             iceCreamConeRepo,
             iceCreamCupRepo
         })
+        const customerRepo = new R.CustomerRepoInMemory({ iceCreamRepo })
 
         const createCustomer = new CreateCustomer({
             customerRepo: customerRepo

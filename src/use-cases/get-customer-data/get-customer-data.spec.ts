@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, test } from "vitest"
-import { CustomerRepoInMemory } from "#repositories/in-memory"
+import * as R from "#repositories/in-memory"
 import { CreateCustomer } from "#use-cases/create-customer"
 import { CustomerData } from "#repositories"
 import { getError } from "#utils"
@@ -9,7 +9,15 @@ import { GetCustomerData } from "."
 
 describe("Use Cases || GetCustomerData", () => {
     test("Get Data With Valid Customer Id", async () => {
-        const customerRepo = new CustomerRepoInMemory()
+        const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
+        const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
+        const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
+        const customerRepo = new R.CustomerRepoInMemory({ iceCreamRepo })
         const createCustomer = new CreateCustomer({ customerRepo })
         const getCostumerData = new GetCustomerData({ customerRepo })
 
@@ -35,7 +43,15 @@ describe("Use Cases || GetCustomerData", () => {
     })
 
     test("Get Data With Invalid Customer Id", async () => {
-        const customerRepo = new CustomerRepoInMemory()
+        const iceCreamConeRepo = new R.IceCreamConeRepoInMemory()
+        const iceCreamCupRepo = new R.IceCreamCupRepoInMemory()
+        const iceCreamBallRepo = new R.IceCreamBallRepoInMemory()
+        const iceCreamRepo = new R.IceCreamRepoInMemory({
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo
+        })
+        const customerRepo = new R.CustomerRepoInMemory({ iceCreamRepo })
         const createCustomer = new CreateCustomer({ customerRepo })
         const getCostumerData = new GetCustomerData({ customerRepo })
 

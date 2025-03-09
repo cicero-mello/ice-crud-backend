@@ -15,7 +15,6 @@ import { getAccessToken } from "./get-access-token"
 import * as R from "#repositories/sql"
 
 export const registerRoutes = (fastify: FastifyInstance) => {
-    const customerRepo = new R.CustomerRepoSQL()
     const iceCreamBallRepo = new R.IceCreamBallRepoSQL()
     const iceCreamCupRepo = new R.IceCreamCupRepoSQL()
     const iceCreamConeRepo = new R.IceCreamConeRepoSQL()
@@ -24,6 +23,7 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         iceCreamConeRepo,
         iceCreamCupRepo
     })
+    const customerRepo = new R.CustomerRepoSQL({ iceCreamRepo })
 
     const validateCustomer = getValidateCustomer(customerRepo)
 
