@@ -4,10 +4,12 @@ import { schema } from "./schema"
 import { getError } from "#utils"
 import { RenameIceCream } from "#use-cases"
 import { IceCreamRepo } from "#repositories"
+import { PreValidation } from "#routes/types"
 
 export const patchRenameIceCream = (
     fastify: FastifyInstance,
-    iceCreamRepo: IceCreamRepo
+    iceCreamRepo: IceCreamRepo,
+    preValidation: PreValidation
 ) => {
     const URL = "/rename-ice-cream"
 
@@ -32,5 +34,5 @@ export const patchRenameIceCream = (
         }
     }
 
-    fastify.patch(URL, { schema }, patch)
+    fastify.patch(URL, { schema, preValidation }, patch)
 }

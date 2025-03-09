@@ -18,13 +18,13 @@ export class CustomerLogin implements T.CustomerLoginUseCase {
         const accessToken = jwt.sign(
             { customerId: id },
             process.env.ACCESS_TOKEN_SECRET_KEY!,
-            { expiresIn: '15m' }
+            { expiresIn: process.env.ACCESS_TOKEN_DURATION! as any }
         )
 
         const refreshToken = jwt.sign(
             { customerId: id },
             process.env.REFRESH_TOKEN_SECRET_KEY!,
-            { expiresIn: '7d' }
+            { expiresIn: process.env.REFRESH_TOKEN_DURATION! as any }
         )
 
         if (!accessToken || !refreshToken) {
