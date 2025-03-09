@@ -7,4 +7,5 @@ export interface PatchRenameIceCreamRequest {
 
 export type FastifyRequest = FR<{
     Body: PatchRenameIceCreamRequest
+    Headers: { accessToken: string }
 }>

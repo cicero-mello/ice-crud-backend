@@ -6,4 +6,5 @@ export interface DeleteIceCreamRequest {
 
 export type FastifyRequest = FR<{
     Body: DeleteIceCreamRequest
+    Headers: { accessToken: string }
 }>

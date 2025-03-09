@@ -1,13 +1,15 @@
 import { FastifyInstance, FastifyReply } from "fastify"
 import { FastifyRequest } from "./types"
 import { schema } from "./schema"
-import { getError } from "#utils"
+import { getCustomerIdFromRequest, getError } from "#utils"
 import { GetCustomerData } from "#use-cases"
 import { CustomerData, CustomerRepo } from "#repositories"
+import { PreValidation } from "#routes/types"
 
 export const getCustomerData = (
     fastify: FastifyInstance,
-    customerRepo: CustomerRepo
+    customerRepo: CustomerRepo,
+    preValidation: PreValidation
 ) => {
     const URL = "/get-customer-data"
 
@@ -19,9 +21,8 @@ export const getCustomerData = (
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const { customerId } = request.query
-
         try {
+            const customerId = getCustomerIdFromRequest(request)
             const data = await getCustomerData.execute({
                 customerId
             })
@@ -35,5 +36,5 @@ export const getCustomerData = (
         }
     }
 
-    fastify.get(URL, { schema }, get)
+    fastify.get(URL, { schema, preValidation }, get)
 }
