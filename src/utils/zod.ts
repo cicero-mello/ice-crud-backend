@@ -22,3 +22,10 @@ export const accessToken = (z
         message: "This AccessToken has a suspicious script pattern"
     })
 )
+
+export const refreshToken = (z
+    .string({ message: "RefreshToken Must Be String" })
+    .regex(noScriptPattern, {
+        message: "This RefreshToken has a suspicious script pattern"
+    })
+)

@@ -27,6 +27,7 @@ export const registerRoutes = (fastify: FastifyInstance) => {
     const validateCustomer = getValidateCustomer(customerRepo)
 
     postCreateCustomer(fastify, customerRepo)
+    postCustomerLogin(fastify, customerRepo)
     postCreateIceCream(
         fastify,
         {
@@ -71,6 +72,4 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         { iceCreamConeRepo, iceCreamCupRepo, iceCreamRepo },
         validateCustomer
     )
-
-    postCustomerLogin(fastify, customerRepo)
 }

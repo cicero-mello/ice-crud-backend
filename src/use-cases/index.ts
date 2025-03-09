@@ -30,3 +30,6 @@ export * from "./update-ice-cream-base/types"
 
 export * from "./customer-login"
 export * from "./customer-login/types"
+
+export * from "./get-access-token"
+export * from "./get-access-token/types"
