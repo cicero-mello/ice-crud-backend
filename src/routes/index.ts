@@ -57,10 +57,11 @@ export const registerRoutes = (fastify: FastifyInstance) => {
     })
 
     patchRenameIceCream(fastify, iceCreamRepo, validateCustomer)
-    patchUpdateIceCreamBall(fastify, {
-        iceCreamBallRepo,
-        iceCreamRepo
-    })
+    patchUpdateIceCreamBall(
+        fastify,
+        { iceCreamBallRepo, iceCreamRepo },
+        validateCustomer
+    )
     patchUpdateIceCreamBase(fastify, {
         iceCreamConeRepo,
         iceCreamCupRepo,

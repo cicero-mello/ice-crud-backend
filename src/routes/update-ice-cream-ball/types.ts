@@ -9,6 +9,7 @@ export interface PatchUpdateIceCreamBallRequest {
 
 export type FastifyRequest = FR<{
     Body: PatchUpdateIceCreamBallRequest
+    Headers: { accessToken: string }
 }>
 
 export interface Repos {
