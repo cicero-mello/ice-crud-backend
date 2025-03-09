@@ -7,6 +7,7 @@ export interface GetCustomerDataRequest {
 
 export type FastifyRequest = FR<{
     Querystring: GetCustomerDataRequest
+    Headers: { accessToken: string }
 }>
 
 export interface Repos {

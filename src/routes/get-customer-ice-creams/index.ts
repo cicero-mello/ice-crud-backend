@@ -1,12 +1,14 @@
 import { FastifyInstance, FastifyReply } from "fastify"
 import { FastifyRequest, Repos } from "./types"
 import { schema } from "./schema"
-import { getError } from "#utils"
+import { getCustomerIdFromRequest, getError } from "#utils"
 import { GetCustomerIceCreams } from "#use-cases"
+import { PreValidation } from "#routes/types"
 
 export const getCustomerIceCreams = (
     fastify: FastifyInstance,
-    repos: Repos
+    repos: Repos,
+    preValidation: PreValidation
 ) => {
     const URL = "/get-customer-ice-creams"
     const getCustomerIceCreams = new GetCustomerIceCreams(repos)
@@ -15,9 +17,8 @@ export const getCustomerIceCreams = (
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const { customerId } = request.query
-
         try {
+            const customerId = getCustomerIdFromRequest(request)
             const data = await getCustomerIceCreams.execute({
                 customerId
             })
@@ -27,5 +28,5 @@ export const getCustomerIceCreams = (
         }
     }
 
-    fastify.get(URL, { schema }, get)
+    fastify.get(URL, { schema, preValidation }, get)
 }

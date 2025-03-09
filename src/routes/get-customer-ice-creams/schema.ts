@@ -3,11 +3,13 @@ import { FastifySchema } from "fastify"
 export const schema: FastifySchema = {
     tags: ["customer", "ice-cream"],
     description: "Get All Customer Ice Creams",
-    querystring: {
+    headers: {
         type: "object",
-        required: ["customerId"],
+        required: ["accessToken"],
         properties: {
-            customerId: { type: "string" }
+            accessToken: {
+                type: "string"
+            }
         }
     },
     response: {
