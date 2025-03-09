@@ -4,10 +4,12 @@ import { schema } from "./schema"
 import { getError } from "#utils"
 import { DeleteIceCreamBall } from "#use-cases"
 import { IceCreamBallRepo } from "#repositories"
+import { PreValidation } from "#routes/types"
 
 export const deleteIceCreamBall = (
     fastify: FastifyInstance,
-    iceCreamBallRepo: IceCreamBallRepo
+    iceCreamBallRepo: IceCreamBallRepo,
+    preValidation: PreValidation
 ) => {
     const URL = "/delete-ball"
     const deleteIceCreamBall = new DeleteIceCreamBall({
@@ -34,5 +36,5 @@ export const deleteIceCreamBall = (
         })
     }
 
-    fastify.delete(URL, { schema }, deleteFunc)
+    fastify.delete(URL, { schema, preValidation }, deleteFunc)
 }
