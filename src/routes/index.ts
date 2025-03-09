@@ -62,11 +62,11 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         { iceCreamBallRepo, iceCreamRepo },
         validateCustomer
     )
-    patchUpdateIceCreamBase(fastify, {
-        iceCreamConeRepo,
-        iceCreamCupRepo,
-        iceCreamRepo
-    })
+    patchUpdateIceCreamBase(
+        fastify,
+        { iceCreamConeRepo, iceCreamCupRepo, iceCreamRepo },
+        validateCustomer
+    )
 
     postCustomerLogin(fastify, customerRepo)
 }

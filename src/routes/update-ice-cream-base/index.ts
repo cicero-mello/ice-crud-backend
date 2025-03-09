@@ -5,10 +5,12 @@ import { getError } from "#utils"
 import { UpdateIceCreamBase } from "#use-cases"
 import { IceCreamBaseType } from "#enums"
 import * as E from "#entities"
+import { PreValidation } from "#routes/types"
 
 export const patchUpdateIceCreamBase = (
     fastify: FastifyInstance,
-    repos: Repos
+    repos: Repos,
+    preValidation: PreValidation
 ) => {
     const URL = "/update-ice-cream-base"
 
@@ -38,5 +40,5 @@ export const patchUpdateIceCreamBase = (
         }
     }
 
-    fastify.patch(URL, { schema }, patch)
+    fastify.patch(URL, { schema, preValidation }, patch)
 }
