@@ -33,3 +33,6 @@ export * from "./customer-login/types"
 
 export * from "./get-access-token"
 export * from "./get-access-token/types"
+
+export * from "./delete-customer"
+export * from "./delete-customer/types"
