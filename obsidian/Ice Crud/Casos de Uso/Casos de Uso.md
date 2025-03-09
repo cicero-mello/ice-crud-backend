@@ -4,4 +4,7 @@
 - [[Atualizar Sorvete]]
 - [[Obter Dados do Usuário]]
 - [[Obter Sorvetes do Usuário]]
-
+- [[Customer Login]]
+- [[Deletar Customer]]
+- [[Obter Novo AccessToken]]
+- 

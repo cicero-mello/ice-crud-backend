@@ -7,8 +7,8 @@ export class GetAccessToken implements T.GetAccessTokenUseCase {
     public customerRepo: CustomerRepo
 
     async execute(
-        refreshToken: string
-    ): Promise<{ accessToken: string }> {
+        { refreshToken }: T.GetAccessTokenRequest
+    ): Promise<T.GetAccessTokenResponse> {
         zodValidate.refreshToken.parse(refreshToken)
 
         const decoded = jwt.verify(
@@ -20,8 +20,8 @@ export class GetAccessToken implements T.GetAccessTokenUseCase {
 
         const accessToken = jwt.sign(
             { customerId: decoded.customerId },
-            process.env.REFRESH_TOKEN_SECRET_KEY!,
-            { expiresIn: process.env.REFRESH_TOKEN_DURATION! as any }
+            process.env.ACCESS_TOKEN_SECRET_KEY!,
+            { expiresIn: process.env.ACCESS_TOKEN_DURATION! as any }
         )
 
         return { accessToken }
