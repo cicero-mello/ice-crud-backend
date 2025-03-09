@@ -45,7 +45,7 @@ export const registerRoutes = (fastify: FastifyInstance) => {
     )
 
     deleteIceCreamBall(fastify, iceCreamBallRepo, validateCustomer)
-    deleteIceCream(fastify, iceCreamRepo)
+    deleteIceCream(fastify, iceCreamRepo, validateCustomer)
 
     getCustomerData(fastify, customerRepo)
     getCustomerIceCreams(fastify, {
