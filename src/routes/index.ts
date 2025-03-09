@@ -27,13 +27,17 @@ export const registerRoutes = (fastify: FastifyInstance) => {
     const validateCustomer = getValidateCustomer(customerRepo)
 
     postCreateCustomer(fastify, customerRepo)
-    postCreateIceCream(fastify, {
-        customerRepo,
-        iceCreamBallRepo,
-        iceCreamConeRepo,
-        iceCreamCupRepo,
-        iceCreamRepo
-    })
+    postCreateIceCream(
+        fastify,
+        {
+            customerRepo,
+            iceCreamBallRepo,
+            iceCreamConeRepo,
+            iceCreamCupRepo,
+            iceCreamRepo
+        },
+        validateCustomer
+    )
     postAddIceCreamBall(
         fastify,
         { iceCreamBallRepo, iceCreamRepo },

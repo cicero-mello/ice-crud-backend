@@ -4,7 +4,6 @@ import { FastifyRequest as FR } from "fastify"
 
 export interface CreateIceCreamRequest {
     name: string
-    customerId: string
     balls: {
         flavor: BallFlavor
         size: Size
