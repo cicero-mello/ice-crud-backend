@@ -1,13 +1,15 @@
 import { FastifyInstance, FastifyReply } from "fastify"
-import { AddIceCreamBall,  } from "#use-cases"
+import { AddIceCreamBall, } from "#use-cases"
 import { FastifyRequest, Repos } from "./types"
 import { schema } from "./schema"
 import { getError } from "#utils"
 import { IceCreamBall } from "#entities"
+import { PreValidation } from "#routes/types"
 
 export const postAddIceCreamBall = (
     fastify: FastifyInstance,
-    { iceCreamBallRepo, iceCreamRepo }: Repos
+    { iceCreamBallRepo, iceCreamRepo }: Repos,
+    preValidation: PreValidation
 ) => {
     const URL = "/add-ball"
     const addIceCreamBall = new AddIceCreamBall({
@@ -40,5 +42,5 @@ export const postAddIceCreamBall = (
         })
     }
 
-    fastify.post(URL, { schema }, post)
+    fastify.post(URL, { schema, preValidation }, post)
 }

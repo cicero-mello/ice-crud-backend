@@ -34,10 +34,11 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         iceCreamCupRepo,
         iceCreamRepo
     })
-    postAddIceCreamBall(fastify, {
-        iceCreamBallRepo,
-        iceCreamRepo
-    })
+    postAddIceCreamBall(
+        fastify,
+        { iceCreamBallRepo, iceCreamRepo },
+        validateCustomer
+    )
 
     deleteIceCreamBall(fastify, iceCreamBallRepo)
     deleteIceCream(fastify, iceCreamRepo)
