@@ -1,11 +1,10 @@
 import { IceCream, IceCreamBall, IceCreamCup } from "#entities"
-import { CreateIceCream } from "#use-cases/create-ice-cream"
-import { CreateCustomer } from "#use-cases/create-customer"
+import { CreateCustomer, CreateIceCream } from "#use-cases"
 import { describe, expect, test } from "vitest"
 import * as R from "#repositories/in-memory"
 import { Avatar, Size, BallFlavor } from "#enums"
 import { getError } from "#utils"
-import { nanoid } from "nanoid"
+import { DeleteIceCream } from "."
 
 describe("Use Cases || DeleteIceCream", () => {
     test("Delete IceCream", async () => {
@@ -65,7 +64,10 @@ describe("Use Cases || DeleteIceCream", () => {
         )).toEqual(created.iceCreamDBRow)
 
         try {
-            await iceCreamRepo.delete({
+            const deleteIceCream = new DeleteIceCream({
+                iceCreamRepo
+            })
+            await deleteIceCream.execute({
                 iceCreamId: created.iceCream.id
             })
         } catch (error) {
@@ -89,8 +91,11 @@ describe("Use Cases || DeleteIceCream", () => {
         })
 
         try {
-            await iceCreamRepo.delete({
-                iceCreamId: nanoid()
+            const deleteIceCream = new DeleteIceCream({
+                iceCreamRepo
+            })
+            await deleteIceCream.execute({
+                iceCreamId: "invalid id"
             })
         } catch (error) {
             expect(!!error).toEqual(true)
