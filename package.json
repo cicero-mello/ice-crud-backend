@@ -24,6 +24,7 @@
         "vitest": "^3.0.7"
     },
     "dependencies": {
+        "@fastify/cors": "^11.0.0",
         "@fastify/swagger": "^9.4.2",
         "@fastify/swagger-ui": "^5.2.2",
         "@prisma/client": "^6.4.1",
