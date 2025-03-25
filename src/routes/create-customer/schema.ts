@@ -17,7 +17,8 @@ export const schema: FastifySchema = {
             description: "Successful response",
             type: "object",
             properties: {
-                message: { type: "string" }
+                accessToken: { type: "string" },
+                refreshToken: { type: "string" }
             }
         }
     }

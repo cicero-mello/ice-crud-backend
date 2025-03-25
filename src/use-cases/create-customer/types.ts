@@ -5,6 +5,8 @@ export type CreateCustomerRequest = CustomerConstructor
 export type CreateCustomerResponse = Promise<{
     customer: Customer
     customerDBRow: CustomerDBRow
+    accessToken: string
+    refreshToken: string
 }>
 
 export interface CreateCustomerUseCase {

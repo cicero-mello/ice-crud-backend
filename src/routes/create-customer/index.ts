@@ -19,15 +19,15 @@ export const postCreateCustomer = (
         const { name, avatar, pass } = request.body
 
         try {
-            await createCustomer.execute({ avatar, name, pass })
+            const {
+                refreshToken,
+                accessToken
+            } = await createCustomer.execute({ avatar, name, pass })
+            reply.status(201).send({ refreshToken, accessToken })
         } catch (error) {
             reply.status(500).send({ message: getError(error) })
             return
         }
-
-        reply.status(201).send({
-            message: "Customer Created"
-        })
     }
 
     fastify.post(URL, { schema }, post)
