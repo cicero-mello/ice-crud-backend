@@ -23,11 +23,13 @@ export const deleteCustomer = (
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const customerId = getCustomerIdFromRequest(request)
 
         try {
+            const customerId = getCustomerIdFromRequest(request)
+            const { name } = await customerRepo.getById({ customerId })
+
             await customerLogin.execute({
-                name: request.body.name,
+                name: name,
                 pass: request.body.pass
             })
 

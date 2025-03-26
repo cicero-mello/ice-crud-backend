@@ -1,7 +1,6 @@
 import { FastifyRequest as FR } from "fastify"
 
 export interface DeleteCustomerRequest {
-    name: string
     pass: string
 }
 

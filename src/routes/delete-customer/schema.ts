@@ -14,9 +14,8 @@ export const schema: FastifySchema = {
     },
     body: {
         type: "object",
-        required: ["name", "pass"],
+        required: ["pass"],
         properties: {
-            name: { type: "string" },
             pass: { type: "string" }
         }
     },
