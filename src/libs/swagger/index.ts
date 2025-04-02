@@ -11,9 +11,9 @@ export const setupSwagger = async (fastify: FastifyInstance) => {
                 version: "1.0.0"
             },
             tags: [
+                { name: "auth", description: "Authentication endpoints" },
                 { name: "customer", description: "Customer endpoints" },
-                { name: "ice-cream", description: "Ice Cream endpoints" },
-                { name: "auth", description: "Authentication endpoints" }
+                { name: "ice-cream", description: "Ice Cream endpoints" }
             ]
         }
     })

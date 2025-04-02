@@ -10,6 +10,5 @@ export type FastifyRequest = FR<{
 }>
 
 export interface PostCustomerLoginResponse {
-    accessToken: string
-    refreshToken: string
+    message: string
 }

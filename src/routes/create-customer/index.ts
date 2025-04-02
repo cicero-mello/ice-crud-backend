@@ -23,7 +23,18 @@ export const postCreateCustomer = (
                 refreshToken,
                 accessToken
             } = await createCustomer.execute({ avatar, name, pass })
-            reply.status(201).send({ refreshToken, accessToken })
+
+            reply.setCookie('access_token', accessToken, {
+                httpOnly: true,
+                path: '/'
+            })
+
+            reply.setCookie('refresh_token', refreshToken, {
+                httpOnly: true,
+                path: '/'
+            })
+
+            reply.status(201).send({ message: "Customer Created! You are Logged." })
         } catch (error) {
             reply.status(500).send({ message: getError(error) })
             return

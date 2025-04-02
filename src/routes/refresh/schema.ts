@@ -7,7 +7,7 @@ export const schema: FastifySchema = {
         200: {
             type: "object",
             properties: {
-                accessToken: { type: "string" }
+                message: { type: "string" }
             }
         }
     }

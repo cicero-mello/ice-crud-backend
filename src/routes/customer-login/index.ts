@@ -1,7 +1,7 @@
+import { FastifyInstance, FastifyReply } from "fastify"
 import { CustomerRepo } from "#repositories"
 import { CustomerLogin } from "#use-cases"
-import { FastifyInstance, FastifyReply } from "fastify"
-import { FastifyRequest, PostCustomerLoginResponse } from "./types"
+import { FastifyRequest } from "./types"
 import { getError } from "#utils"
 import { schema } from "./schema"
 
@@ -24,10 +24,15 @@ export const postCustomerLogin = (
             const tokens = await customerLogin.execute({
                 name, pass
             })
-            reply.status(200).send({
-                accessToken: tokens.accessToken,
-                refreshToken: tokens.refreshToken
-            } as PostCustomerLoginResponse)
+            reply.setCookie('access_token', tokens.accessToken, {
+                httpOnly: true,
+                path: '/',
+            })
+            reply.setCookie('refresh_token', tokens.refreshToken, {
+                httpOnly: true,
+                path: '/'
+            })
+            reply.status(200).send({ message: "You Are Logged" })
         } catch (error) {
              reply.status(500).send({ message: getError(error) })
         }
