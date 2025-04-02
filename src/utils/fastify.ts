@@ -3,7 +3,7 @@ import { FastifyRequest } from "fastify"
 import jwt from "jsonwebtoken"
 
 export const getCustomerIdFromRequest = (request: FastifyRequest): string => {
-    const accessToken = request.headers.accesstoken
+    const accessToken = request.cookies.access_token
     zodValidate.accessToken.parse(accessToken)
 
     const decoded = jwt.verify(

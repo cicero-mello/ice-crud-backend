@@ -3,15 +3,6 @@ import { FastifySchema } from "fastify"
 export const schema: FastifySchema = {
     tags: ["ice-cream"],
     description: "Update an existing Ice Cream Ball",
-    headers: {
-        type: "object",
-        required: ["accessToken"],
-        properties: {
-            accessToken: {
-                type: "string"
-            }
-        }
-    },
     body: {
         type: "object",
         required: ["iceCreamId", "ball"],

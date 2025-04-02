@@ -6,5 +6,4 @@ export interface DeleteCustomerRequest {
 
 export type FastifyRequest = FR<{
     Body: DeleteCustomerRequest
-    Headers: { accessToken: string }
 }>

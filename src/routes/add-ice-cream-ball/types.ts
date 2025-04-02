@@ -12,7 +12,6 @@ export interface AddIceCreamBallRequest {
 
 export type FastifyRequest = FR<{
     Body: AddIceCreamBallRequest
-    Headers: { accessToken: string }
 }>
 
 export interface Repos {

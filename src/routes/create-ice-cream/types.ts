@@ -19,7 +19,6 @@ export interface CreateIceCreamRequest {
 
 export type FastifyRequest = FR<{
     Body: CreateIceCreamRequest
-    Headers: { accessToken: string }
 }>
 
 export interface Repos {

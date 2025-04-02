@@ -21,7 +21,7 @@ export const getAccessToken = (
     ) => {
         try {
             const { accessToken } = await getAccessToken.execute({
-                refreshToken: request.headers.refreshtoken
+                refreshToken: request.cookies.refresh_token as string
             })
             reply.status(200).send({ accessToken })
         } catch (error) {

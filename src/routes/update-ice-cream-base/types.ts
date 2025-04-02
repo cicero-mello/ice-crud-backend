@@ -11,7 +11,6 @@ export interface PatchUpdateIceCreamBaseRequest {
 
 export type FastifyRequest = FR<{
     Body: PatchUpdateIceCreamBaseRequest
-    Headers: { accessToken: string }
 }>
 
 export interface Repos {

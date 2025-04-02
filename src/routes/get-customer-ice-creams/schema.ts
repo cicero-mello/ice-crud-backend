@@ -3,15 +3,6 @@ import { FastifySchema } from "fastify"
 export const schema: FastifySchema = {
     tags: ["customer", "ice-cream"],
     description: "Get All Customer Ice Creams",
-    headers: {
-        type: "object",
-        required: ["accessToken"],
-        properties: {
-            accessToken: {
-                type: "string"
-            }
-        }
-    },
     response: {
         200: {
             type: "object",
