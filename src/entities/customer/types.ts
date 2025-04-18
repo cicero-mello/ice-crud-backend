@@ -20,3 +20,8 @@ export interface CustomerConstructor {
     salt?: string
     hash?: string
 }
+
+export interface CustomerInfo {
+    name: string
+    avatar: Avatar
+}

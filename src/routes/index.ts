@@ -14,6 +14,7 @@ import { getValidateCustomer } from "./validate"
 import { refresh } from "./refresh"
 import { deleteCustomer } from "./delete-customer"
 import * as R from "#repositories/sql"
+import { patchCustomerInfo } from "./update-customer-info"
 
 export const registerRoutes = (fastify: FastifyInstance) => {
     const iceCreamBallRepo = new R.IceCreamBallRepoSQL()
@@ -66,6 +67,7 @@ export const registerRoutes = (fastify: FastifyInstance) => {
         validateCustomer
     )
 
+    patchCustomerInfo(fastify, customerRepo, validateCustomer)
     patchRenameIceCream(fastify, iceCreamRepo, validateCustomer)
     patchUpdateIceCreamBall(
         fastify,

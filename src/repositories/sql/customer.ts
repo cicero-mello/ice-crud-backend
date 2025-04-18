@@ -2,13 +2,13 @@ import { prisma } from "#libs/prisma"
 import { zodValidate } from "#utils"
 import {
     CreateCustomerRepoParams,
-    CustomerData,
     CustomerDBRow,
     CustomerRepo,
     CustomerRepoConstructor,
     DeleteCustomerRepoParams,
     GetByIdCustomerRepoParams,
-    IceCreamRepo
+    IceCreamRepo,
+    UpdateCustomerInfoParams
 } from "#repositories"
 
 export class CustomerRepoSQL implements CustomerRepo {
@@ -30,7 +30,7 @@ export class CustomerRepoSQL implements CustomerRepo {
 
     async getById(
         { customerId }: GetByIdCustomerRepoParams
-    ): Promise<CustomerData> {
+    ): Promise<CustomerDBRow> {
         const targetCustomer = await prisma.customer.findUnique({
             where: { id: customerId }
         })
@@ -42,7 +42,9 @@ export class CustomerRepoSQL implements CustomerRepo {
         return {
             avatar: targetCustomer.avatar,
             id: targetCustomer.id,
-            name: targetCustomer.name
+            name: targetCustomer.name,
+            hash: targetCustomer.hash,
+            salt: targetCustomer.salt
         }
     }
 
@@ -75,6 +77,29 @@ export class CustomerRepoSQL implements CustomerRepo {
         return targetCustomer
     }
 
+    async updateCustomerInfo({
+        customer
+    }: UpdateCustomerInfoParams): Promise<CustomerDBRow> {
+        zodValidate.id.parse(customer.id)
+
+        const targetCustomer = await prisma.customer.findUnique({
+            where: { id: customer.id }
+        })
+        if (!targetCustomer) {
+            throw new Error("Customer not found!")
+        }
+
+        const updatedCustomerDBRow = await prisma.customer.update({
+            where: { id: customer.id },
+            data: {
+                avatar: customer.avatar,
+                name: customer.name
+            }
+        })
+
+        return updatedCustomerDBRow
+    }
+
     async delete({
         customerId
     }: DeleteCustomerRepoParams): Promise<void> {
@@ -96,7 +121,7 @@ export class CustomerRepoSQL implements CustomerRepo {
         })
     }
 
-    constructor(params: CustomerRepoConstructor){
+    constructor(params: CustomerRepoConstructor) {
         this.iceCreamRepo = params.iceCreamRepo
     }
 }

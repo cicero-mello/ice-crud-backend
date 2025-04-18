@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, test } from "vitest"
 import * as R from "#repositories/in-memory"
 import { CreateCustomer } from "#use-cases/create-customer"
-import { CustomerData } from "#repositories"
+import { CustomerData } from "./types"
 import { getError } from "#utils"
 import { Avatar } from "#enums"
 import { nanoid } from "nanoid"

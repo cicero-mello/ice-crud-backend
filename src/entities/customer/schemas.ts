@@ -52,7 +52,7 @@ export const base = z.object({
         .optional(),
     hash: z
         .string({ message: "Hash must be string" })
-        .length(32, { message: "Invalid hash length" })
+        .length(64, { message: "Invalid hash length" })
         .optional()
 }).strict()
 
@@ -71,3 +71,20 @@ export const removeIceCream = (z
         message: "IceCreamId has a suspicious script pattern"
     })
 )
+
+export const updateCustomerInfo = z.object({
+    name: z.string({ message: "Name must be string" })
+        .min(1, { message: "Name must have at least 1 char" })
+        .max(32, { message: "Name exceed max length (32)" })
+        .regex(usernameSpecialCharacters, {
+            message:
+                "You can't use special characters" +
+                " (except '-', '.' and space between letters)"
+        })
+        .regex(noScriptPattern, {
+            message: "Name has a suspicious script pattern"
+        }),
+    avatar: z.nativeEnum(Avatar, {
+        message: "Invalid Avatar"
+    })
+})

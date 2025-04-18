@@ -18,21 +18,20 @@ export interface GetByIdCustomerRepoParams {
     customerId: string
 }
 
-export interface CustomerData {
-    id: string
-    name: string
-    avatar: Avatar
-}
-
 export interface DeleteCustomerRepoParams {
     customerId: string
+}
+
+export interface UpdateCustomerInfoParams {
+    customer: Customer
 }
 
 export interface CustomerRepo {
     iceCreamRepo: IceCreamRepo
     create(params: CreateCustomerRepoParams): Promise<CustomerDBRow>
-    getById(params: GetByIdCustomerRepoParams): Promise<CustomerData>
+    getById(params: GetByIdCustomerRepoParams): Promise<CustomerDBRow>
     getByName(name: string): Promise<CustomerDBRow>
+    updateCustomerInfo(params: UpdateCustomerInfoParams): Promise<CustomerDBRow>
     alreadyExists(customerId: string): Promise<boolean>
     usernameIsAvailable(username: string): Promise<boolean>
     delete(params: DeleteCustomerRepoParams): Promise<void>

@@ -380,4 +380,36 @@ describe("Customer", () => {
         expect(customer.salt).toEqual(salt)
         expect(customer.iceCreams).toEqual(iceCreams)
     })
+
+    test("Update Customer Info", () => {
+        const name = "Osaka"
+        const pass = "esukareta-erebeta"
+        const avatar = Avatar.AsianYoungWoman
+        const id = nanoid()
+        const salt = generateSalt()
+        const iceCreams: IceCream[] = []
+
+        const customer = new Customer({
+            avatar, name, pass,
+            iceCreams, salt, id
+        })
+
+        expect(customer.name).toEqual(name)
+        expect(customer.avatar).toEqual(avatar)
+
+        const newAvatar = Avatar.Clown
+        const newName = "Joker"
+
+        try {
+            customer.updateCustomerInfo({
+                name: newName,
+                avatar: newAvatar
+            })
+        } catch (error) {
+            expect.fail(getError(error))
+        }
+
+        expect(customer.name).toEqual(newName)
+        expect(customer.avatar).toEqual(newAvatar)
+    })
 })

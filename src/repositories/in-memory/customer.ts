@@ -1,12 +1,12 @@
 import {
     CreateCustomerRepoParams,
-    CustomerData,
     CustomerDBRow,
     CustomerRepo,
     CustomerRepoConstructor,
     DeleteCustomerRepoParams,
     GetByIdCustomerRepoParams,
-    IceCreamRepo
+    IceCreamRepo,
+    UpdateCustomerInfoParams
 } from "#repositories"
 
 export class CustomerRepoInMemory implements CustomerRepo {
@@ -29,7 +29,7 @@ export class CustomerRepoInMemory implements CustomerRepo {
 
     async getById(
         { customerId }: GetByIdCustomerRepoParams
-    ): Promise<CustomerData> {
+    ): Promise<CustomerDBRow> {
         const targetCustomer = this.customers.find(
             ({ id }) => id === customerId
         )
@@ -41,8 +41,27 @@ export class CustomerRepoInMemory implements CustomerRepo {
         return {
             avatar: targetCustomer.avatar,
             id: targetCustomer.id,
-            name: targetCustomer.name
+            name: targetCustomer.name,
+            hash: targetCustomer.hash,
+            salt: targetCustomer.salt
         }
+    }
+
+    async updateCustomerInfo({
+        customer
+    }: UpdateCustomerInfoParams): Promise<CustomerDBRow> {
+        const targetCustomer = this.customers.find(
+            ({ id }) => id === customer.id
+        )
+
+        if (!targetCustomer) {
+            throw new Error("Customer not found!")
+        }
+
+        targetCustomer.avatar = customer.avatar
+        targetCustomer.name = customer.name
+
+        return targetCustomer
     }
 
     async usernameIsAvailable(
@@ -83,7 +102,7 @@ export class CustomerRepoInMemory implements CustomerRepo {
         this.customers.splice(index, 1)
     }
 
-    constructor(params: CustomerRepoConstructor){
+    constructor(params: CustomerRepoConstructor) {
         this.iceCreamRepo = params.iceCreamRepo
     }
 }

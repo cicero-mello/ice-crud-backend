@@ -7,31 +7,31 @@ import * as T from "./types"
 export class Customer {
     private readonly props: T.CustomerProps
 
-    get id () {
+    get id() {
         return this.props.id
     }
 
-    get name () {
+    get name() {
         return this.props.name
     }
 
-    get hash () {
+    get hash() {
         return this.props.hash
     }
 
-    get salt () {
+    get salt() {
         return this.props.salt
     }
 
-    get iceCreams () {
+    get iceCreams() {
         return [...this.props.iceCreams]
     }
 
-    get avatar () {
+    get avatar() {
         return this.props.avatar
     }
 
-    addIceCream (iceCream: IceCream) {
+    addIceCream(iceCream: IceCream) {
         schema.addIceCream.parse(iceCream)
         this.props.iceCreams.push(iceCream)
     }
@@ -44,8 +44,14 @@ export class Customer {
         )
     }
 
-    constructor (props: T.CustomerConstructor) {
-        if(!props.pass && !props.hash){
+    updateCustomerInfo(customerInfo: T.CustomerInfo) {
+        schema.updateCustomerInfo.parse(customerInfo)
+        this.props.name = customerInfo.name
+        this.props.avatar = customerInfo.avatar
+    }
+
+    constructor(props: T.CustomerConstructor) {
+        if (!props.pass && !props.hash) {
             throw new Error("Missing pass or hash")
         }
 

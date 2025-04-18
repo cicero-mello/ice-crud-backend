@@ -10,7 +10,13 @@ export class GetCustomerData implements T.GetCustomerDataUseCase {
     ): Promise<T.GetCustomerDataResponse> {
         zodValidate.id.parse(customerId)
 
-        return await this.customerRepo.getById({ customerId })
+        const customer = await this.customerRepo.getById({ customerId })
+
+        return {
+            avatar: customer.avatar,
+            id: customer.id,
+            name: customer.name
+        }
     }
 
     constructor({ customerRepo }: T.GetCustomerDataUseCaseConstructor) {
