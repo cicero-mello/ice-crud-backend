@@ -89,6 +89,17 @@ export class CustomerRepoSQL implements CustomerRepo {
             throw new Error("Customer not found!")
         }
 
+        const customerWithSameName = await prisma.customer.findUnique({
+            where: { name: customer.name }
+        })
+        const newNameInUse = (
+            !!customerWithSameName &&
+            customerWithSameName.id != targetCustomer.id
+        )
+        if (newNameInUse) {
+            throw new Error(`"${customer.name}" Already in Use`)
+        }
+
         const updatedCustomerDBRow = await prisma.customer.update({
             where: { id: customer.id },
             data: {

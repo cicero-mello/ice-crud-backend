@@ -58,6 +58,17 @@ export class CustomerRepoInMemory implements CustomerRepo {
             throw new Error("Customer not found!")
         }
 
+        const customerWithSameName = this.customers.find(
+            ({ name }) => name === customer.name
+        )
+        const newNameInUse = (
+            !!customerWithSameName &&
+            customerWithSameName.id != targetCustomer.id
+        )
+        if (newNameInUse) {
+            throw new Error(`"${customer.name}" Already in Use`)
+        }
+
         targetCustomer.avatar = customer.avatar
         targetCustomer.name = customer.name
 
