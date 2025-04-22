@@ -35,12 +35,12 @@ describe("Use Cases || DeleteIceCreamBall", () => {
         })
 
         const ball1 = new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.small,
         })
 
         const ball2 = new IceCreamBall({
-            flavor: BallFlavor.vanilla,
+            flavor: BallFlavor.Vanilla,
             size: Size.big,
         })
 

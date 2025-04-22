@@ -2,8 +2,8 @@ import { FastifyInstance, FastifyReply } from "fastify"
 import { FastifyRequest } from "./types"
 import { schema } from "./schema"
 import { getCustomerIdFromRequest, getError } from "#utils"
-import { GetCustomerData } from "#use-cases"
-import { CustomerData, CustomerRepo } from "#repositories"
+import { CustomerData, GetCustomerData } from "#use-cases"
+import { CustomerRepo } from "#repositories"
 import { PreValidation } from "#routes/types"
 
 export const getCustomerData = (

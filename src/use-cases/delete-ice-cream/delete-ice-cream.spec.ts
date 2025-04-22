@@ -40,7 +40,7 @@ describe("Use Cases || DeleteIceCream", () => {
                 name: "My ice cream",
                 base: new IceCreamCup({ size: Size.medium }),
                 balls: [new IceCreamBall({
-                    flavor: BallFlavor.chocolate,
+                    flavor: BallFlavor.Chocolate,
                     size: Size.big
                 })]
             })
@@ -52,7 +52,7 @@ describe("Use Cases || DeleteIceCream", () => {
                 name: "My other ice cream",
                 base: new IceCreamCup({ size: Size.small }),
                 balls: [new IceCreamBall({
-                    flavor: BallFlavor.vanilla,
+                    flavor: BallFlavor.Vanilla,
                     size: Size.small
                 })]
             })

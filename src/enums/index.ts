@@ -10,8 +10,10 @@ export enum IceCreamBaseType {
 }
 
 export enum BallFlavor {
-    chocolate,
-    vanilla
+    Chocolate,
+    Vanilla,
+    Grape,
+    Strawberry
 }
 
 export enum Avatar {

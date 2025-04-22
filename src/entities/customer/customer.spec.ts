@@ -171,17 +171,17 @@ describe("Customer", () => {
         })
 
         const ball1 = new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.big
         })
 
         const ball2 = new IceCreamBall({
-            flavor: BallFlavor.vanilla,
+            flavor: BallFlavor.Vanilla,
             size: Size.medium
         })
 
         const ball3 = new IceCreamBall({
-            flavor: BallFlavor.vanilla,
+            flavor: BallFlavor.Vanilla,
             size: Size.small
         })
 
@@ -241,7 +241,7 @@ describe("Customer", () => {
 
         const invalidIceCreams = [
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.big
             }),
             new IceCreamCone({
@@ -353,7 +353,7 @@ describe("Customer", () => {
         const iceCreams = [
             new IceCream({
                 balls: [new IceCreamBall({
-                    flavor: BallFlavor.chocolate,
+                    flavor: BallFlavor.Chocolate,
                     size: Size.big
                 })],
                 base: new IceCreamCup({

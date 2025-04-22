@@ -7,7 +7,7 @@ import { nanoid } from "nanoid"
 
 describe("IceCreamBall", () => {
     test("Create Class", () => {
-        const flavor = BallFlavor.vanilla
+        const flavor = BallFlavor.Vanilla
         const size = Size.medium
         let ball
 
@@ -21,7 +21,7 @@ describe("IceCreamBall", () => {
     })
 
     test("Read Props", () => {
-        const flavor = BallFlavor.vanilla
+        const flavor = BallFlavor.Vanilla
         const size = Size.medium
         let ball
 
@@ -41,7 +41,7 @@ describe("IceCreamBall", () => {
         let ball
         try {
             ball = new IceCreamBall({
-                flavor: BallFlavor.vanilla,
+                flavor: BallFlavor.Vanilla,
                 size: Size.medium,
                 id: id
             })
@@ -62,7 +62,7 @@ describe("IceCreamBall", () => {
 
         invalidSizes.forEach((size: any) => {
             try {
-                new IceCreamBall({ flavor: BallFlavor.vanilla, size })
+                new IceCreamBall({ flavor: BallFlavor.Vanilla, size })
             } catch (error: any) {
                 expect(error).toBeInstanceOf(ZodError)
                 expect(getZodError(error)).toBe("Invalid Size")
@@ -93,7 +93,7 @@ describe("IceCreamBall", () => {
     })
 
     test("Create Id", () => {
-        const flavor = BallFlavor.vanilla
+        const flavor = BallFlavor.Vanilla
         const size = Size.medium
         let ball
 
@@ -108,7 +108,7 @@ describe("IceCreamBall", () => {
     })
 
     test("Update Ball", () => {
-        const flavor = BallFlavor.chocolate
+        const flavor = BallFlavor.Chocolate
         const size = Size.medium
         let ball: IceCreamBall
 
@@ -118,7 +118,7 @@ describe("IceCreamBall", () => {
             expect.fail(getZodError(error))
         }
 
-        const newFlavor = BallFlavor.vanilla
+        const newFlavor = BallFlavor.Vanilla
         const newSize = Size.medium
         const ballId = ball.id
 
@@ -130,7 +130,7 @@ describe("IceCreamBall", () => {
     })
 
     test("Use Invalid Data to Update Ball", () => {
-        const flavor = BallFlavor.chocolate
+        const flavor = BallFlavor.Chocolate
         const size = Size.big
         let ball: IceCreamBall
 
@@ -155,7 +155,7 @@ describe("IceCreamBall", () => {
             [null, null],
             ["a", "a"],
             [null, Size.medium],
-            [BallFlavor.chocolate, "a"],
+            [BallFlavor.Chocolate, "a"],
             ["", ""]
         ]
 
@@ -174,7 +174,7 @@ describe("IceCreamBall", () => {
     })
 
     test("Use Valid Data to Update Ball", () => {
-        const flavor = BallFlavor.chocolate
+        const flavor = BallFlavor.Chocolate
         const size = Size.big
         let ball: IceCreamBall
 
@@ -185,8 +185,8 @@ describe("IceCreamBall", () => {
         }
 
         const validValues = [
-            [BallFlavor.chocolate, Size.medium],
-            [BallFlavor.vanilla, undefined],
+            [BallFlavor.Chocolate, Size.medium],
+            [BallFlavor.Vanilla, undefined],
             [undefined, Size.big],
             [undefined, undefined]
         ]
@@ -202,7 +202,7 @@ describe("IceCreamBall", () => {
             }
         })
 
-        expect(ball.flavor).toBe(BallFlavor.vanilla)
+        expect(ball.flavor).toBe(BallFlavor.Vanilla)
         expect(ball.size).toBe(Size.big)
     })
 })

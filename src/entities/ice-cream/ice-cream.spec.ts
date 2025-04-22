@@ -13,7 +13,7 @@ import {
 const createClass = () => {
     const name = "Meu sorvetão"
     const balls = [new IceCreamBall({
-        flavor: BallFlavor.chocolate,
+        flavor: BallFlavor.Chocolate,
         size: Size.big
     })]
     const base = new IceCreamCone({
@@ -42,7 +42,7 @@ describe("IceCream", () => {
     test("Read Props", () => {
         const name = "Meu sorvetão"
         const balls = [new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.big
         })]
         const base = new IceCreamCone({
@@ -67,7 +67,7 @@ describe("IceCream", () => {
     test("Create Id", () => {
         const name = "Meu sorvetão"
         const balls = [new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.big
         })]
         const base = new IceCreamCone({
@@ -96,7 +96,7 @@ describe("IceCream", () => {
             iceCream = new IceCream({
                 name: "ice-cream-name",
                 balls: [new IceCreamBall({
-                    flavor: BallFlavor.chocolate,
+                    flavor: BallFlavor.Chocolate,
                     size: Size.big
                 })],
                 base: new IceCreamCup({ size: Size.big }),
@@ -111,7 +111,7 @@ describe("IceCream", () => {
 
     test("Use Invalid Names", () => {
         const balls = [new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.big
         })]
         const base = new IceCreamCone({
@@ -170,13 +170,13 @@ describe("IceCream", () => {
     test("Use Invalid Bases", () => {
         const name = "Soverte"
         const balls = [new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.big
         })]
         const invalidBases = [
             null,
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.small
             }),
             undefined,
@@ -202,7 +202,7 @@ describe("IceCream", () => {
     test("Use Valid Bases", () => {
         const name = "Soverte"
         const balls = [new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.big
         })]
         const validBases = [
@@ -272,15 +272,15 @@ describe("IceCream", () => {
         const iceCream = createClass()
         const newBalls = [
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.small
             }),
             new IceCreamBall({
-                flavor: BallFlavor.vanilla,
+                flavor: BallFlavor.Vanilla,
                 size: Size.medium
             }),
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.big
             }),
         ]
@@ -329,15 +329,15 @@ describe("IceCream", () => {
         const iceCream = createClass()
         const balls = [
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.small
             }),
             new IceCreamBall({
-                flavor: BallFlavor.vanilla,
+                flavor: BallFlavor.Vanilla,
                 size: Size.medium
             }),
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.big
             })
         ]
@@ -375,15 +375,15 @@ describe("IceCream", () => {
         const iceCream = createClass()
         const balls = [
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.small
             }),
             new IceCreamBall({
-                flavor: BallFlavor.vanilla,
+                flavor: BallFlavor.Vanilla,
                 size: Size.medium
             }),
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.big
             })
         ]
@@ -445,7 +445,7 @@ describe("IceCream", () => {
 
         const newInvalidBases = [
             new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.medium
             }),
             0,

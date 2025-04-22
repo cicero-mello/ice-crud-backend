@@ -41,7 +41,7 @@ describe("Use Cases || CreateIceCream", () => {
                     name: "My ice cream",
                     base: new IceCreamCup({ size: Size.medium }),
                     balls: [new IceCreamBall({
-                        flavor: BallFlavor.chocolate,
+                        flavor: BallFlavor.Chocolate,
                         size: Size.big
                     })]
                 })
@@ -86,7 +86,7 @@ describe("Use Cases || CreateIceCream", () => {
                     name: "My ice cream",
                     base: new IceCreamCup({ size: Size.medium }),
                     balls: [new IceCreamBall({
-                        flavor: BallFlavor.chocolate,
+                        flavor: BallFlavor.Chocolate,
                         size: Size.big
                     })]
                 })
@@ -127,7 +127,7 @@ describe("Use Cases || CreateIceCream", () => {
 
         const cup = new IceCreamCup({ size: Size.medium })
         const ball = new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.big
         })
 

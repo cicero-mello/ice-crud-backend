@@ -40,7 +40,7 @@ describe("Use Cases || RenameIceCream", () => {
             name: firstName,
             base: new IceCreamCup({ size: Size.medium }),
             balls: [new IceCreamBall({
-                flavor: BallFlavor.chocolate,
+                flavor: BallFlavor.Chocolate,
                 size: Size.big
             })]
         })

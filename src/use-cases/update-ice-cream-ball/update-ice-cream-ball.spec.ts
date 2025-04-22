@@ -37,7 +37,7 @@ describe("Use Cases || UpdateIceCreamBall", () => {
         })
 
         const ball = new IceCreamBall({
-            flavor: BallFlavor.chocolate,
+            flavor: BallFlavor.Chocolate,
             size: Size.small,
         })
 
@@ -65,7 +65,7 @@ describe("Use Cases || UpdateIceCreamBall", () => {
                 iceCreamRepo
             })
             ball.updateBall({
-                flavor: BallFlavor.vanilla,
+                flavor: BallFlavor.Vanilla,
                 size: Size.big
             })
             await updateIceCreamBall.execute({
@@ -75,7 +75,7 @@ describe("Use Cases || UpdateIceCreamBall", () => {
             expect(iceCreamBallRepo.iceCreamBalls).toHaveLength(1)
             expect(iceCreamBallRepo.iceCreamBalls[0].id).toEqual(ball.id)
             expect(iceCreamBallRepo.iceCreamBalls[0].iceCreamId).toEqual(iceCream.id)
-            expect(iceCreamBallRepo.iceCreamBalls[0].flavor).toEqual(BallFlavor.vanilla)
+            expect(iceCreamBallRepo.iceCreamBalls[0].flavor).toEqual(BallFlavor.Vanilla)
             expect(iceCreamBallRepo.iceCreamBalls[0].size).toEqual(Size.big)
         } catch (error) {
             expect.fail(getError(error))
@@ -89,7 +89,7 @@ describe("Use Cases || UpdateIceCreamBall", () => {
                 iceCreamRepo
             })
             ball.updateBall({
-                flavor: BallFlavor.vanilla,
+                flavor: BallFlavor.Vanilla,
                 size: Size.big
             })
             await updateIceCreamBall.execute({

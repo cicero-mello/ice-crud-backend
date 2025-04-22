@@ -46,7 +46,7 @@ describe("Use Cases || GetCustomerIceCreams", () => {
             {
                 name: "Ice Cream 1",
                 balls: [new IceCreamBall({
-                    flavor: BallFlavor.chocolate,
+                    flavor: BallFlavor.Chocolate,
                     size: Size.big
                 })],
                 base: new IceCreamCone({
@@ -57,7 +57,7 @@ describe("Use Cases || GetCustomerIceCreams", () => {
             {
                 name: "Ice Cream 2",
                 balls: [new IceCreamBall({
-                    flavor: BallFlavor.vanilla,
+                    flavor: BallFlavor.Vanilla,
                     size: Size.medium
                 })],
                 base: new IceCreamCup({
@@ -93,8 +93,8 @@ describe("Use Cases || GetCustomerIceCreams", () => {
 
         const { iceCreams } = customerIceCreams
         expect(iceCreams).toHaveLength(2)
-        expect(iceCreams[0].balls[0].flavor).toEqual(BallFlavor.chocolate)
-        expect(iceCreams[1].balls[0].flavor).toEqual(BallFlavor.vanilla)
+        expect(iceCreams[0].balls[0].flavor).toEqual(BallFlavor.Chocolate)
+        expect(iceCreams[1].balls[0].flavor).toEqual(BallFlavor.Vanilla)
         expect(iceCreams[0].baseType).toEqual(IceCreamBaseType.Cone)
         expectTypeOf(iceCreams).toMatchTypeOf<IceCreamData[]>()
         // ---------------------------------------------------------------
