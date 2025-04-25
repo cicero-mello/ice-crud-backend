@@ -4,7 +4,7 @@ import { schema } from "./schema"
 import { getError } from "#utils"
 import { PreValidation } from "#routes/types"
 import { GetIceCream } from "#use-cases/get-ice-cream"
-import { IceCreamData } from "#entities"
+import { GetIceCreamResponse } from "#use-cases/get-ice-cream/types"
 
 export const getIceCream = (
     fastify: FastifyInstance,
@@ -25,12 +25,14 @@ export const getIceCream = (
             })
 
             reply.status(200).send({
-                balls: data.iceCream.balls,
-                base: data.iceCream.base,
-                baseType: data.iceCream.baseType,
-                id: data.iceCream.id,
-                name: data.iceCream.name
-            } as IceCreamData)
+                iceCream: {
+                    balls: data.iceCream.balls,
+                    base: data.iceCream.base,
+                    baseType: data.iceCream.baseType,
+                    id: data.iceCream.id,
+                    name: data.iceCream.name
+                }
+            } as GetIceCreamResponse)
         } catch (error) {
             reply.status(500).send({ message: getError(error) })
         }
