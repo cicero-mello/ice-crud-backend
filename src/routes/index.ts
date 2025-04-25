@@ -15,6 +15,7 @@ import { refresh } from "./refresh"
 import { deleteCustomer } from "./delete-customer"
 import * as R from "#repositories/sql"
 import { patchCustomerInfo } from "./update-customer-info"
+import { getIceCream } from "./get-ice-cream"
 
 export const registerRoutes = (fastify: FastifyInstance) => {
     const iceCreamBallRepo = new R.IceCreamBallRepoSQL()
@@ -54,6 +55,14 @@ export const registerRoutes = (fastify: FastifyInstance) => {
     deleteIceCream(fastify, iceCreamRepo, validateCustomer)
     deleteCustomer(fastify, customerRepo, validateCustomer)
 
+    getIceCream(fastify,
+        {
+            iceCreamConeRepo,
+            iceCreamCupRepo,
+            iceCreamRepo
+        },
+        validateCustomer
+    )
     getCustomerData(fastify, customerRepo, validateCustomer)
     getCustomerIceCreams(
         fastify,
