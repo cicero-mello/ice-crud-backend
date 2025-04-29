@@ -74,10 +74,10 @@ export class IceCreamRepoSQL implements IceCreamRepo {
             await this.iceCreamBallRepo.delete(ball.id)
         )))
 
-        if(iceCream.iceCreamDBRow.baseType === IceCreamBaseType.Cone){
+        if (iceCream.iceCreamDBRow.baseType === IceCreamBaseType.Cone) {
             await this.iceCreamConeRepo.deleteByIceCream(iceCreamId)
         }
-        else if(iceCream.iceCreamDBRow.baseType === IceCreamBaseType.Cup){
+        else if (iceCream.iceCreamDBRow.baseType === IceCreamBaseType.Cup) {
             await this.iceCreamCupRepo.deleteByIceCream(iceCreamId)
         }
 
@@ -88,7 +88,10 @@ export class IceCreamRepoSQL implements IceCreamRepo {
 
     async getByCustomer(customerId: string): Promise<IceCreamDBRow[]> {
         const iceCreams = await prisma.iceCream.findMany({
-            where: { customerId: customerId }
+            where: { customerId: customerId },
+            orderBy: {
+                createdAt: 'desc',
+            }
         })
 
         return iceCreams

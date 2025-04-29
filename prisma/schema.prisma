@@ -20,10 +20,11 @@ model Customer {
 }
 
 model IceCream {
-    id         String @id
+    id         String   @id
     name       String
     baseType   Int
     customerId String
+    createdAt  DateTime @default(now())
 
     Customer     Customer       @relation(fields: [customerId], references: [id])
     Balls        IceCreamBall[]
