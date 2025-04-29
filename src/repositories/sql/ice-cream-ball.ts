@@ -54,7 +54,10 @@ export class IceCreamBallRepoSQL implements IceCreamBallRepo {
         iceCreamId: string
     ): Promise<IceCreamBallResponse[]> {
         const balls = await prisma.iceCreamBall.findMany({
-            where: { iceCreamId: iceCreamId }
+            where: { iceCreamId: iceCreamId },
+            orderBy: {
+                createdAt: 'desc',
+            }
         })
 
         return balls.map((ball) => ({

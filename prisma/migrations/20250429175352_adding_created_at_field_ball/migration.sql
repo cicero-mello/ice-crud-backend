@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "ice_cream_balls" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
