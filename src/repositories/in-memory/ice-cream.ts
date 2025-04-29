@@ -10,7 +10,8 @@ import {
     IceCreamDBRow,
     IceCreamRepo,
     IceCreamRepoConstructor,
-    IceCreamRepoResponse
+    IceCreamRepoResponse,
+    UpdateBaseTypeParams
 } from "#repositories"
 
 export class IceCreamRepoInMemory implements IceCreamRepo {
@@ -33,15 +34,15 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         }
     }
 
-    async update(iceCream: IceCream): Promise<void>{
+    async update(iceCream: IceCream): Promise<void> {
         const { base, baseType } = await this.getBase(iceCream)
-        if(base instanceof IceCreamCone){
+        if (base instanceof IceCreamCone) {
             await this.iceCreamConeRepo.update({
                 iceCreamCone: base,
                 iceCreamId: iceCream.id
             })
         }
-        if(base instanceof IceCreamCup){
+        if (base instanceof IceCreamCup) {
             await this.iceCreamCupRepo.update({
                 iceCreamCup: base,
                 iceCreamId: iceCream.id
@@ -56,12 +57,29 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
         })
 
         this.iceCreams = this.iceCreams.map((repoIceCream) => {
-            if(repoIceCream.id === iceCream.id){
+            if (repoIceCream.id === iceCream.id) {
                 return {
                     baseType: baseType,
                     customerId: repoIceCream.customerId,
                     id: iceCream.id,
                     name: iceCream.name
+                }
+            }
+            return repoIceCream
+        })
+    }
+
+    async updateBaseType({
+        baseType,
+        iceCreamId
+    }: UpdateBaseTypeParams): Promise<void> {
+        this.iceCreams = this.iceCreams.map((repoIceCream) => {
+            if (repoIceCream.id === iceCreamId) {
+                return {
+                    baseType: baseType,
+                    customerId: repoIceCream.customerId,
+                    id: repoIceCream.id,
+                    name: repoIceCream.name
                 }
             }
             return repoIceCream
@@ -98,8 +116,8 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
 
         const balls = await this.iceCreamBallRepo.getByIceCream(iceCreamId)
 
-        let base: IceCreamCone| IceCreamCup
-        if(iceCreamDBRow.baseType === IceCreamBaseType.Cone) {
+        let base: IceCreamCone | IceCreamCup
+        if (iceCreamDBRow.baseType === IceCreamBaseType.Cone) {
             const { iceCreamCone } = await this.iceCreamConeRepo.getByIceCream(iceCreamId)
             base = iceCreamCone
         }
@@ -122,7 +140,7 @@ export class IceCreamRepoInMemory implements IceCreamRepo {
     async getBase(iceCream: IceCream): Promise<GetBaseIceCreamRepoResponse> {
         let base: IceCreamCup | IceCreamCone
         let baseType: IceCreamBaseType
-        if(iceCream.base instanceof IceCreamCone) {
+        if (iceCream.base instanceof IceCreamCone) {
             const { iceCreamCone } = await this.iceCreamConeRepo.getByIceCream(
                 iceCream.id
             )

@@ -2,6 +2,7 @@ import { IceCreamConeRepo, IceCreamCupRepo, IceCreamRepo } from "#repositories"
 import { IceCreamCone, IceCreamCup } from "#entities"
 import { zodValidate } from "#utils"
 import * as T from "./types"
+import { IceCreamBaseType } from "#enums"
 
 export class UpdateIceCreamBase implements T.UpdateIceCreamBaseUseCase {
     public iceCreamRepo: IceCreamRepo
@@ -17,7 +18,11 @@ export class UpdateIceCreamBase implements T.UpdateIceCreamBaseUseCase {
         await this.iceCreamConeRepo.deleteByIceCream(iceCreamId)
         await this.iceCreamCupRepo.deleteByIceCream(iceCreamId)
 
-        if(base instanceof IceCreamCone){
+        if (base instanceof IceCreamCone) {
+            await this.iceCreamRepo.updateBaseType({
+                baseType: IceCreamBaseType.Cone,
+                iceCreamId: iceCreamId
+            })
             await this.iceCreamConeRepo.create({
                 iceCreamId,
                 iceCreamCone: base
@@ -25,7 +30,11 @@ export class UpdateIceCreamBase implements T.UpdateIceCreamBaseUseCase {
             return
         }
 
-        if(base instanceof IceCreamCup){
+        if (base instanceof IceCreamCup) {
+            await this.iceCreamRepo.updateBaseType({
+                baseType: IceCreamBaseType.Cup,
+                iceCreamId: iceCreamId
+            })
             await this.iceCreamCupRepo.create({
                 iceCreamId,
                 iceCreamCup: base,
@@ -36,7 +45,7 @@ export class UpdateIceCreamBase implements T.UpdateIceCreamBaseUseCase {
         throw new Error("Invalid base")
     }
 
-    constructor(params: T.UpdateIceCreamBaseUseCaseConstructor){
+    constructor(params: T.UpdateIceCreamBaseUseCaseConstructor) {
         this.iceCreamRepo = params.iceCreamRepo
         this.iceCreamConeRepo = params.iceCreamConeRepo
         this.iceCreamCupRepo = params.iceCreamCupRepo

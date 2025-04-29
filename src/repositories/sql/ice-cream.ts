@@ -11,7 +11,8 @@ import {
     IceCreamDBRow,
     IceCreamRepo,
     IceCreamRepoConstructor,
-    IceCreamRepoResponse
+    IceCreamRepoResponse,
+    UpdateBaseTypeParams
 } from "#repositories"
 
 export class IceCreamRepoSQL implements IceCreamRepo {
@@ -61,6 +62,18 @@ export class IceCreamRepoSQL implements IceCreamRepo {
             data: {
                 baseType: baseType,
                 name: iceCream.name
+            }
+        })
+    }
+
+    async updateBaseType({
+        baseType,
+        iceCreamId
+    }: UpdateBaseTypeParams): Promise<void> {
+        await prisma.iceCream.update({
+            where: { id: iceCreamId },
+            data: {
+                baseType: baseType
             }
         })
     }

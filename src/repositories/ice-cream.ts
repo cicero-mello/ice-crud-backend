@@ -31,6 +31,11 @@ export interface GetBaseIceCreamRepoResponse {
     baseType: IceCreamBaseType
 }
 
+export interface UpdateBaseTypeParams {
+    baseType: IceCreamBaseType
+    iceCreamId: string
+}
+
 export interface IceCreamRepo {
     iceCreamCupRepo: IceCreamCupRepo
     iceCreamConeRepo: IceCreamConeRepo
@@ -39,6 +44,7 @@ export interface IceCreamRepo {
     alreadyExists(iceCreamId: string): Promise<boolean>
     create(params: CreateIceCreamRepoParams): Promise<IceCreamDBRow>
     update(iceCream: IceCream): Promise<void>
+    updateBaseType(baseType: UpdateBaseTypeParams): Promise<void>
     delete(params: DeleteIceCreamRepoParams): Promise<void>
     getByCustomer(customerId: string): Promise<IceCreamDBRow[]>
     getById(iceCreamId: string): Promise<IceCreamRepoResponse>
