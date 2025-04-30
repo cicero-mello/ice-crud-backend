@@ -7,7 +7,11 @@ export const setupSwagger = async (fastify: FastifyInstance) => {
         swagger: {
             info: {
                 title: "🍨 Ice CRUD 🍨",
-                description: "Ice Cream Management API",
+                description:
+                    "Ice Cream Management API.\n\n" +
+                    "To use the endpoints, first you need to make a 'customer-login'\n" +
+                    "(You can use the 'create-customer' instead).\n\n" +
+                    "When your token expires, just use the 'refresh'",
                 version: "1.0.0"
             },
             tags: [
