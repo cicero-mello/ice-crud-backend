@@ -11,6 +11,7 @@ export interface IceCreamBallDBRow {
 export interface CreateIceCreamBallParams {
     iceCreamBall: IceCreamBall
     iceCreamId: string
+    createdAt?: Date
 }
 
 export interface UpdateIceCreamBallParams {

@@ -27,7 +27,7 @@ export class CreateIceCream implements T.CreateIceCreamUseCase {
 
         const baseType = (
             iceCream.base instanceof IceCreamCup ?
-            IceCreamBaseType.Cup : IceCreamBaseType.Cone
+                IceCreamBaseType.Cup : IceCreamBaseType.Cone
         )
 
         const iceCreamDBRow = await this.iceCreamRepo.create({
@@ -60,16 +60,28 @@ export class CreateIceCream implements T.CreateIceCreamUseCase {
         }
     }
 
-    private async createBalls(iceCream: IceCream){
-        iceCream.balls.forEach(async (ball) => {
+    private async createBalls(iceCream: IceCream) {
+        iceCream.balls.forEach(async (ball, index) => {
             const alreadyExists = await this.iceCreamBallRepo.alreadyExists(
                 ball.id
             )
-            if(alreadyExists){
+
+            if (alreadyExists) {
                 throw new Error("This Ice Cream Ball Already Exists!")
             }
+
+            const subtractSeconds = (date: Date, seconds: number): Date => (
+                new Date(date.getTime() - seconds * 1000)
+            )
+
+            const getCreatedAt = () => {
+                const now = new Date()
+                return subtractSeconds(now, index)
+            }
+
             await this.iceCreamBallRepo.create({
                 iceCreamBall: ball,
+                createdAt: getCreatedAt(),
                 iceCreamId: iceCream.id
             })
         })

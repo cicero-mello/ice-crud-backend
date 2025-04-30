@@ -12,12 +12,13 @@ export class IceCreamBallRepoSQL implements IceCreamBallRepo {
 
     async create({
         iceCreamBall,
-        iceCreamId
+        iceCreamId,
+        createdAt
     }: CreateIceCreamBallParams): Promise<IceCreamBallDBRow> {
         const { flavor, id, size } = iceCreamBall
 
         await prisma.iceCreamBall.create({
-            data: { flavor, id, size, iceCreamId }
+            data: { flavor, id, size, iceCreamId, createdAt }
         })
 
         return {
